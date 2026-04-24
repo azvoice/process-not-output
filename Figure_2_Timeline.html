@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Figure 2 — Timeline of Kohls Rulings, EO 14365, and the March 2026 Framework</title>
+<style>
+  body {
+    font-family: "Times New Roman", Georgia, serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 30px;
+    line-height: 1.5;
+  }
+  .figure-caption {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .figure-title {
+    font-size: 15px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .svg-wrap {
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    padding: 16px;
+    background: #ffffff;
+  }
+  .footer-note {
+    font-size: 11px;
+    font-style: italic;
+    color: #555555;
+    margin-top: 14px;
+  }
+  svg { display: block; width: 100%; height: auto; background: #ffffff; }
+
+  .tl-axis       { stroke: #7a7a7a; stroke-width: 1; }
+  .tl-tick       { stroke: #7a7a7a; stroke-width: 1; }
+  .tl-guide      { stroke: #b0b0b0; stroke-width: 0.75; stroke-dasharray: 3 3; }
+  .tl-axis-lbl   { fill: #333333; font-size: 11px; font-family: "Times New Roman"; }
+
+  .section-lbl   { fill: #1a1a1a; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
+  .section-sub   { fill: #555555; font-size: 11px; font-style: italic; font-family: "Times New Roman"; }
+
+  /* KOHLS (red family) - above the axis */
+  .kohls-dot     { fill: #A32D2D; }
+  .kohls-box     { fill: #fdeaea; stroke: #A32D2D; stroke-width: 1; }
+  .kohls-lbl     { fill: #6b0e0e; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
+  .kohls-date    { fill: #8a1f1f; font-size: 11px; font-family: "Times New Roman"; }
+  .kohls-guide   { stroke: #A32D2D; stroke-width: 0.75; stroke-dasharray: 3 3; }
+
+  /* EO + FRAMEWORK (blue family) - below the axis */
+  .eo-dot        { fill: #1E60A8; }
+  .eo-box        { fill: #eaf1f9; stroke: #1E60A8; stroke-width: 1; }
+  .eo-lbl        { fill: #0f3e6f; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
+  .eo-date       { fill: #1E60A8; font-size: 11px; font-family: "Times New Roman"; }
+  .eo-guide      { stroke: #1E60A8; stroke-width: 0.75; stroke-dasharray: 3 3; }
+
+  /* PROCESS STATUTES (purple, smaller) */
+  .proc-dot      { fill: #3C3489; }
+  .proc-lbl      { fill: #3C3489; font-size: 11px; font-family: "Times New Roman"; font-style: italic; }
+</style>
+</head>
+<body>
+  <div class="figure-caption">FIGURE 2.</div>
+  <div class="figure-title">Timeline of Kohls v. Bonta rulings, Executive Order 14365, and the March 2026 National Policy Framework, October 2024 to March 2026.</div>
+
+  <div class="svg-wrap">
+    <svg viewBox="0 0 820 440" role="img"
+         aria-label="Horizontal timeline spanning October 2024 to March 2026 showing the Kohls preliminary injunction, Kohls summary judgment, EO 14365, and the White House National Policy Framework, with TRAIGA and TFAIA effective dates plotted alongside.">
+      <title>Timeline of Kohls v. Bonta rulings, EO 14365, and the March 2026 National Policy Framework</title>
+
+      <!-- Section labels -->
+      <text x="40" y="34" class="section-lbl">Constitutional predictor</text>
+      <text x="40" y="50" class="section-sub">(Kohls v. Bonta rulings)</text>
+
+      <text x="40" y="410" class="section-lbl">Federal preemption effort</text>
+      <text x="40" y="426" class="section-sub">(Executive Order 14365 and March 2026 Framework)</text>
+
+      <!-- Main timeline axis -->
+      <line x1="70"  y1="230" x2="780" y2="230" class="tl-axis"/>
+      <line x1="70"  y1="225" x2="70"  y2="235" class="tl-tick"/>
+      <line x1="780" y1="225" x2="780" y2="235" class="tl-tick"/>
+
+      <!-- Quarter tick marks -->
+      <line x1="188" y1="228" x2="188" y2="232" class="tl-tick"/>
+      <line x1="306" y1="228" x2="306" y2="232" class="tl-tick"/>
+      <line x1="424" y1="228" x2="424" y2="232" class="tl-tick"/>
+      <line x1="543" y1="228" x2="543" y2="232" class="tl-tick"/>
+      <line x1="661" y1="228" x2="661" y2="232" class="tl-tick"/>
+
+      <!-- Axis labels -->
+      <text x="70"  y="256" class="tl-axis-lbl" text-anchor="start">Oct 2024</text>
+      <text x="188" y="256" class="tl-axis-lbl" text-anchor="middle">Jan 2025</text>
+      <text x="306" y="256" class="tl-axis-lbl" text-anchor="middle">Apr 2025</text>
+      <text x="424" y="256" class="tl-axis-lbl" text-anchor="middle">Jul 2025</text>
+      <text x="543" y="256" class="tl-axis-lbl" text-anchor="middle">Oct 2025</text>
+      <text x="661" y="256" class="tl-axis-lbl" text-anchor="middle">Jan 2026</text>
+      <text x="780" y="256" class="tl-axis-lbl" text-anchor="end">Mar 2026</text>
+
+      <!-- === KOHLS EVENTS (above axis) === -->
+
+      <!-- Kohls PI: Oct 2, 2024 -> x = 76 (very near start) -->
+      <circle cx="76" cy="230" r="5" class="kohls-dot"/>
+      <line x1="76" y1="225" x2="76" y2="175" class="kohls-guide"/>
+      <rect x="18" y="95" width="168" height="80" rx="5" class="kohls-box"/>
+      <text x="102" y="118" text-anchor="middle" class="kohls-lbl">Kohls v. Bonta</text>
+      <text x="102" y="136" text-anchor="middle" class="kohls-lbl">Preliminary Injunction</text>
+      <text x="102" y="156" text-anchor="middle" class="kohls-date">Oct. 2, 2024</text>
+      <text x="102" y="170" text-anchor="middle" class="kohls-date">E.D. Cal.</text>
+
+      <!-- Kohls SJ: Aug 29, 2025 -> x = 495 -->
+      <circle cx="495" cy="230" r="5" class="kohls-dot"/>
+      <line x1="495" y1="225" x2="495" y2="175" class="kohls-guide"/>
+      <rect x="411" y="95" width="168" height="80" rx="5" class="kohls-box"/>
+      <text x="495" y="118" text-anchor="middle" class="kohls-lbl">Kohls v. Bonta</text>
+      <text x="495" y="136" text-anchor="middle" class="kohls-lbl">Summary Judgment</text>
+      <text x="495" y="156" text-anchor="middle" class="kohls-date">Aug. 29, 2025</text>
+      <text x="495" y="170" text-anchor="middle" class="kohls-date">E.D. Cal.</text>
+
+      <!-- === PROCESS STATUTES EFFECTIVE DATES (on axis, inline) === -->
+
+      <!-- TRAIGA + TFAIA eff: Jan 1, 2026 -> x = 661 (same point) -->
+      <circle cx="661" cy="230" r="3.5" class="proc-dot"/>
+      <text x="661" y="208" text-anchor="middle" class="proc-lbl">TRAIGA + TFAIA eff.</text>
+      <text x="661" y="194" text-anchor="middle" class="proc-lbl">Jan. 1, 2026</text>
+
+      <!-- === EO + FRAMEWORK EVENTS (below axis) === -->
+
+      <!-- EO 14365: Dec 11, 2025 -> x = 629 -->
+      <circle cx="629" cy="230" r="5" class="eo-dot"/>
+      <line x1="629" y1="235" x2="629" y2="292" class="eo-guide"/>
+      <rect x="492" y="292" width="168" height="80" rx="5" class="eo-box"/>
+      <text x="576" y="315" text-anchor="middle" class="eo-lbl">Executive Order</text>
+      <text x="576" y="333" text-anchor="middle" class="eo-lbl">No. 14,365</text>
+      <text x="576" y="353" text-anchor="middle" class="eo-date">Dec. 11, 2025</text>
+      <text x="576" y="367" text-anchor="middle" class="eo-date">90 Fed. Reg. 58,499</text>
+
+      <!-- National Policy Framework: Mar 20, 2026 -> x = 769 (near end) -->
+      <circle cx="769" cy="230" r="5" class="eo-dot"/>
+      <line x1="769" y1="235" x2="769" y2="292" class="eo-guide"/>
+      <rect x="678" y="292" width="130" height="80" rx="5" class="eo-box"/>
+      <text x="743" y="315" text-anchor="middle" class="eo-lbl">National Policy</text>
+      <text x="743" y="333" text-anchor="middle" class="eo-lbl">Framework</text>
+      <text x="743" y="353" text-anchor="middle" class="eo-date">Mar. 20, 2026</text>
+      <text x="743" y="367" text-anchor="middle" class="eo-date">(White House)</text>
+
+    </svg>
+  </div>
+
+  <div class="footer-note">
+    Process statutes (TRAIGA and TFAIA) took effect on January 1, 2026, between the Kohls summary judgment (Aug. 29, 2025) and the March 2026 National Policy Framework. Both statutes are PROCESS-bucket enactments the Note defends. See notes 110, 117.
+  </div>
+</body>
+</html>

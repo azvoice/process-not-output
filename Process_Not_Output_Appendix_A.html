@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix A — The 193-Law Dataset</title>
+<style>
+  body {
+    font-family: "Times New Roman", Georgia, serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+    line-height: 1.5;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    margin: 0 0 4px 0;
+  }
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 28px 0;
+  }
+  .methodology {
+    font-size: 14px;
+    text-align: justify;
+    text-indent: 0.25in;
+    margin-bottom: 20px;
+  }
+  .summary-counts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .count-card {
+    border: 1px solid #c8c8c8;
+    border-radius: 6px;
+    padding: 10px 14px;
+    text-align: center;
+    background: #fafafa;
+  }
+  .count-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #555; margin-bottom: 4px; }
+  .count-card .count { font-size: 22px; font-weight: bold; color: #1a1a1a; }
+  .count-card .pct { font-size: 12px; color: #555; margin-top: 2px; }
+  .count-card.conduct { border-left: 4px solid #2E7D5B; }
+  .count-card.output  { border-left: 4px solid #A32D2D; }
+  .count-card.process { border-left: 4px solid #3C3489; }
+  .count-card.mixed   { border-left: 4px solid #8B5A00; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  thead th {
+    background: #e8e8e8;
+    border: 1px solid #999;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: bold;
+    vertical-align: bottom;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  thead th.num-col { width: 3%; text-align: center; }
+  thead th.state-col { width: 8%; }
+  thead th.statute-col { width: 30%; }
+  thead th.citation-col { width: 16%; }
+  thead th.effdate-col { width: 10%; }
+  thead th.category-col { width: 21%; }
+  thead th.bucket-col { width: 8%; text-align: center; }
+
+  tbody td {
+    border: 1px solid #cccccc;
+    padding: 7px 10px;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  tbody tr:nth-child(even) { background: #f7f7f4; }
+  tbody tr:hover { background: #fdf8e8; }
+
+  td.num { text-align: center; font-variant-numeric: tabular-nums; color: #555; }
+  td.state { font-weight: bold; }
+  td.statute a {
+    color: #0b4c8c;
+    text-decoration: none;
+    border-bottom: 1px dotted #0b4c8c;
+  }
+  td.statute a:hover { border-bottom-style: solid; }
+  td.citation { font-family: Consolas, Menlo, monospace; font-size: 11px; color: #333; }
+  td.effdate { font-size: 11px; color: #444; }
+  td.category { font-size: 11px; color: #333; }
+  td.bucket-cell { text-align: center; }
+
+  .bucket {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .bucket-conduct { background: #e6f3ec; color: #1a5a3e; border: 1px solid #2E7D5B; }
+  .bucket-output  { background: #fdeaea; color: #6b0e0e; border: 1px solid #A32D2D; }
+  .bucket-process { background: #ecebf5; color: #2A2566; border: 1px solid #3C3489; }
+  .bucket-mixed   { background: #fbf0df; color: #5a3b00; border: 1px solid #8B5A00; }
+
+  .footer-note {
+    font-size: 11px;
+    color: #555;
+    font-style: italic;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  /* Print styles */
+  @media print {
+    body { margin: 0; padding: 12px; max-width: 100%; }
+    table { font-size: 9.5px; }
+    thead th { position: static; }
+    tbody tr:hover { background: inherit; }
+    td.statute a { color: #1a1a1a; border-bottom: none; }
+    .count-card { background: #ffffff; }
+    @page { size: landscape; margin: 0.5in; }
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    body { margin: 20px auto; padding: 0 12px; }
+    table { font-size: 11px; }
+    thead th, tbody td { padding: 5px 6px; }
+    .summary-counts { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <h1>APPENDIX A</h1>
+  <h2>THE 193-LAW DATASET</h2>
+
+  <p class="methodology">
+    This Appendix enumerates all 193 enacted state AI statutes coded in the dataset underlying Section III.
+    Each row lists the state, the statute&rsquo;s name or bill number (hyperlinked to the primary source),
+    a working citation form (pending Bluebook verification at Stage 4), effective date, the subject-matter
+    category from the compilation underlying the dataset, and the regulatory-modality bucket assigned by the
+    author. Citations in this Appendix preserve the working-data format rather than law-review Bluebook form;
+    every citation will be verified and conformed to Bluebook citation rules at Stage 4. The taxonomy is the
+    author&rsquo;s original analytical work. <em>See supra</em> note 108 for provenance and methodology details.
+  </p>
+
+  <div class="summary-counts">
+    <div class="count-card conduct">
+      <div class="label">Conduct</div>
+      <div class="count">84</div>
+      <div class="pct">43.5%</div>
+    </div>
+    <div class="count-card output">
+      <div class="label">Output</div>
+      <div class="count">60</div>
+      <div class="pct">31.1%</div>
+    </div>
+    <div class="count-card process">
+      <div class="label">Process</div>
+      <div class="count">31</div>
+      <div class="pct">16.1%</div>
+    </div>
+    <div class="count-card mixed">
+      <div class="label">Mixed</div>
+      <div class="count">18</div>
+      <div class="pct">9.3%</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="num-col">No.</th>
+        <th class="state-col">State</th>
+        <th class="statute-col">Statute / Bill</th>
+        <th class="citation-col">Citation</th>
+        <th class="effdate-col">Effective</th>
+        <th class="category-col">Subject Category</th>
+        <th class="bucket-col">Bucket</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td class="state">Alabama</td>
+          <td class="statute"><a href="https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/HB172-enr.pdf" target="_blank" rel="noopener noreferrer">Alabama Materially Deceptive Advertising Election Media Law</a></td>
+          <td class="citation">AL HB172</td>
+          <td class="effdate">October 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td class="state">Alabama</td>
+          <td class="statute"><a href="https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2024RS/HB168-enr.pdf" target="_blank" rel="noopener noreferrer">Alabama Child Protection Act of 2024</a></td>
+          <td class="citation">HB 168</td>
+          <td class="effdate">October 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td class="state">Arizona</td>
+          <td class="statute"><a href="https://www.azleg.gov/legtext/56leg/2R/laws/0193.pdf" target="_blank" rel="noopener noreferrer">Arizona General Deepfake Law</a></td>
+          <td class="citation">HB 2394</td>
+          <td class="effdate">June 4, 2024</td>
+          <td class="category">II-C. General Deepfake Laws</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td class="state">Arizona</td>
+          <td class="statute"><a href="https://www.azleg.gov/legtext/56leg/2R/laws/0199.pdf" target="_blank" rel="noopener noreferrer">Arizona Political Deepfake Law Advertising</a></td>
+          <td class="citation">SB 1359</td>
+          <td class="effdate">June 4, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td class="state">Arizona</td>
+          <td class="statute"><a href="https://apps.azleg.gov/BillStatus/BillOverview/82119" target="_blank" rel="noopener noreferrer">Computational Power Law</a></td>
+          <td class="citation">HB 2342</td>
+          <td class="effdate">April 18, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td class="state">Arkansas</td>
+          <td class="statute"><a href="https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2025R%2FPublic%2FACT927.pdf" target="_blank" rel="noopener noreferrer">Ownership of Model Training and Generated Content</a></td>
+          <td class="citation">Arkansas Code Title 18-</td>
+          <td class="effdate">April 21, 2025</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td class="state">Arkansas</td>
+          <td class="statute"><a href="https://arkleg.state.ar.us/Home/FTPDocument?path=%2FACTS%2F2025R%2FPublic%2FACT977.pdf" target="_blank" rel="noopener noreferrer">Amendment of Arkansas CSAM Laws</a></td>
+          <td class="citation">HB1877</td>
+          <td class="effdate">July 21, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">8</td>
+          <td class="state">Arkansas</td>
+          <td class="statute"><a href="https://arkleg.state.ar.us/Bills/Detail?id=hb1071&amp;ddBienniumSession=2025%2F2025R" target="_blank" rel="noopener noreferrer">Publicity Rights Protection Act (AI Amendment)</a></td>
+          <td class="citation">HB 1071</td>
+          <td class="effdate">February 25, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">9</td>
+          <td class="state">Arkansas</td>
+          <td class="statute"><a href="https://arkleg.state.ar.us/Bills/Detail?id=HB1876&amp;ddBienniumSession=2025%2F2025R" target="_blank" rel="noopener noreferrer">GenAI Ownership Law</a></td>
+          <td class="citation">HB 1876</td>
+          <td class="effdate">April 21, 2025</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">10</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://cppa.ca.gov/regulations/pdf/ccpa_updates_cyber_risk_admt_appr_text.pdf" target="_blank" rel="noopener noreferrer">California Consumer Privacy Act Making Regulations</a></td>
+          <td class="citation">11 CCR § 7001 et seq.</td>
+          <td class="effdate">January 1, 2027</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">11</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://url.us.m.mimecastprotect.com/s/xp7nCERxwAs3VRg7vFVtXC7i2_i?domain=fpf.informz.net" target="_blank" rel="noopener noreferrer">California Consumer Privacy Act</a></td>
+          <td class="citation">AB 1008</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">12</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB1836" target="_blank" rel="noopener noreferrer">Amendment to Deceased Personality Protections</a></td>
+          <td class="citation">AB 1836</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">13</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240AB2013" target="_blank" rel="noopener noreferrer">Artificial Intelligence Training Data Transparency Act</a></td>
+          <td class="citation">AB 2013</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">14</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2355" target="_blank" rel="noopener noreferrer">Amendment to the Political Reform Advertising Act</a></td>
+          <td class="citation">AB 2355</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">15</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2602" target="_blank" rel="noopener noreferrer">Replica of Voice or Likeness Law</a></td>
+          <td class="citation">AB 2602</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">16</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2655" target="_blank" rel="noopener noreferrer">&amp; Defending Democracy from Online Platforms Deepfake Deception Act of 2024 Broadly Enjoined by Kohls v. Bonta (E.D. Cal.) (2:24cv2527)</a></td>
+          <td class="citation">AB 2655</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">XII-E. Social Media &amp; Platforms</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">17</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2839" target="_blank" rel="noopener noreferrer">Deceptive Media in Election Advertising Advertisements Narrowly Enjoined by Kohls v. Bonta (E.D. Cal.)</a></td>
+          <td class="citation">AB 2839</td>
+          <td class="effdate">September 17, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">18</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240AB2885" target="_blank" rel="noopener noreferrer">AI Definition Bill</a></td>
+          <td class="citation">AB 2885</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">19</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2905" target="_blank" rel="noopener noreferrer">AI Call Disclosures Law</a></td>
+          <td class="citation">AB 2905</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">20</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB325" target="_blank" rel="noopener noreferrer">Cartwright Act Common Pricing Algorithm Amendment</a></td>
+          <td class="citation">AB 325</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">XII-A. Algorithmic Pricing</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">21</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB723" target="_blank" rel="noopener noreferrer">Real Estate Digitally Altered Images Disclosures</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 10140.8</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">XII-B. AI in Real Estate</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">22</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB243" target="_blank" rel="noopener noreferrer">California Companion Chatbot</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 22601 et. seq.</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">23</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260AB489" target="_blank" rel="noopener noreferrer">Health Advice From Artificial Intelligence</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 4999.9</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">24</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB524" target="_blank" rel="noopener noreferrer">Law Enforcement Usage of Artificial Intelligence</a></td>
+          <td class="citation">Cal. Civ. Code § 13663</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">25</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB316" target="_blank" rel="noopener noreferrer">Civil Actions</a></td>
+          <td class="citation">Cal. Civ. Code § 1714.46</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">26</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB316" target="_blank" rel="noopener noreferrer">Data Broker Registration AI Disclosures</a></td>
+          <td class="citation">Cal. Civ. Code § 1798.99.82</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">27</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&amp;sectionNum=11546.45.5." target="_blank" rel="noopener noreferrer">California Government AI Inventory Law</a></td>
+          <td class="citation">Cal. Gov. Code § 11546.45.5</td>
+          <td class="effdate">January 1, 2024</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">28</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240AB3030" target="_blank" rel="noopener noreferrer">Artificial Intelligence in Health Care Services</a></td>
+          <td class="citation">Cal. Gov. Code § Section 1339.75 AB 3030</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">29</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?chapter=7.5.&amp;part=1.&amp;lawCode=PEN&amp;title=9" target="_blank" rel="noopener noreferrer">Amendment of California CSAM Laws</a></td>
+          <td class="citation">Cal. Penal Code Part 1;</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">30</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://calcivilrights.ca.gov/wp-content/uploads/sites/32/2025/03/Attachment-B-Final-Unmodified-Text-of-Proposed-Employment-Regulations-Regarding-Automated-Decision-Systems.pdf" target="_blank" rel="noopener noreferrer">Employment Regulations Regarding Automated-Decision Systems, issued pursuant to the California Fair Employment and Housing Act, Cal. Gov. Code § § 12935(a), 12940, 12941</a></td>
+          <td class="citation">Civil Rights Council Employment Regulations Regarding</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">IV. AI in Employment</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">31</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB1120" target="_blank" rel="noopener noreferrer">AI Healthcare Utilization Law</a></td>
+          <td class="citation">SB 1120</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">32</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53" target="_blank" rel="noopener noreferrer">Transparency in Frontier Artificial Purpose AI Intelligence Act</a></td>
+          <td class="citation">SB 53</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">XI. Frontier &amp; General-Purpose AI</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">33</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billVersionsCompareClient.xhtml?bill_id=202320240SB896" target="_blank" rel="noopener noreferrer">Generative Artificial Intelligence Accountability Act</a></td>
+          <td class="citation">SB 896</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">34</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB926" target="_blank" rel="noopener noreferrer">Amendment of California Law Governing Distribution of Intimate Images</a></td>
+          <td class="citation">SB 926</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">35</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202320240SB942" target="_blank" rel="noopener noreferrer">California AI Transparency Act</a></td>
+          <td class="citation">SB 942</td>
+          <td class="effdate">Jan. 1, 2026 (original); Aug. 2, 2026 (as amended by AB 853)</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">36</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB981" target="_blank" rel="noopener noreferrer">&amp; Digital Identity Theft Act Online Platforms</a></td>
+          <td class="citation">SB 981</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">XII-E. Social Media &amp; Platforms</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">37</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://leg.colorado.gov/bills/sb24-205" target="_blank" rel="noopener noreferrer">Colorado Artificial Intelligence Act</a></td>
+          <td class="citation">SB 205</td>
+          <td class="effdate">Enacted May 17, 2024; superseded by SB 25-004</td>
+          <td class="category">XI. Comprehensive AI Governance</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">38</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://leg.colorado.gov/sites/default/files/2025a_288_signed.pdf" target="_blank" rel="noopener noreferrer">Preventing Unauthorized Disclosure of Intimate Digital Depictions Act</a></td>
+          <td class="citation">SB 288</td>
+          <td class="effdate">August 6, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM; II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">39</td>
+          <td class="state">Connecticut</td>
+          <td class="statute"><a href="https://www.cga.ct.gov/current/pub/chap_244c.htm" target="_blank" rel="noopener noreferrer">Transportation Network Company Dynamic Pricing</a></td>
+          <td class="citation">Conn. Gen. Stat. § 13b-</td>
+          <td class="effdate">January 1, 2018</td>
+          <td class="category">XII-A. Algorithmic Pricing</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">40</td>
+          <td class="state">Connecticut</td>
+          <td class="statute"><a href="https://www.cga.ct.gov/current/pub/chap_743jj.htm" target="_blank" rel="noopener noreferrer">Connecticut Data Privacy Act Making</a></td>
+          <td class="citation">Conn. Gen. Stat. § 42- 515 et seq.</td>
+          <td class="effdate">July 1, 2023</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">41</td>
+          <td class="state">Connecticut</td>
+          <td class="statute"><a href="https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&amp;bill_num=SB01103&amp;which_year=2023" target="_blank" rel="noopener noreferrer">Making and Personal Data Privacy</a></td>
+          <td class="citation">SB 1103</td>
+          <td class="effdate">July 1, 2023</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">42</td>
+          <td class="state">Connecticut</td>
+          <td class="statute"><a href="https://www.cga.ct.gov/2025/ACT/PA/PDF/2025PA-00113-R00SB-01295-PA.PDF" target="_blank" rel="noopener noreferrer">Connecticut Data Privacy Act</a></td>
+          <td class="citation">SB 1295</td>
+          <td class="effdate">July 1, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">43</td>
+          <td class="state">Delaware</td>
+          <td class="statute"><a href="https://delcode.delaware.gov/title6/c012d/index.html" target="_blank" rel="noopener noreferrer">Delaware Personal Data Privacy Making Act</a></td>
+          <td class="citation">Del. Code tit. 6, § 12D- 101 et seq.</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">44</td>
+          <td class="state">Delaware</td>
+          <td class="statute"><a href="https://legis.delaware.gov/BillDetail/140866" target="_blank" rel="noopener noreferrer">Delaware Artificial Intelligence Commission Act</a></td>
+          <td class="citation">HB 233</td>
+          <td class="effdate">July 17, 2024</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">45</td>
+          <td class="state">Delaware</td>
+          <td class="statute"><a href="https://legis.delaware.gov/BillDetail/141103" target="_blank" rel="noopener noreferrer">Amendment to the Delaware Code Relating to Deepfakes</a></td>
+          <td class="citation">HB 353</td>
+          <td class="effdate">August 7, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">46</td>
+          <td class="state">Florida</td>
+          <td class="statute"><a href="https://custom.statenet.com/public/resources.cgi?mode=show_text&amp;id=ID:bill:FL2024000H919&amp;verid=FL2024000H919_20240426_0_CH&amp;" target="_blank" rel="noopener noreferrer">Florida Act Relating to AI Use in Advertising Political Advertising</a></td>
+          <td class="citation">HB 919</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">47</td>
+          <td class="state">Florida</td>
+          <td class="statute"><a href="https://www.flsenate.gov/Session/Bill/2024/1680/ByVersion" target="_blank" rel="noopener noreferrer">Amendment of Florida CSAM Laws</a></td>
+          <td class="citation">SB 1680</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">48</td>
+          <td class="state">Florida</td>
+          <td class="statute"><a href="https://laws.flrules.org/2023/201" target="_blank" rel="noopener noreferrer">Florida Digital Bill of Rights Making</a></td>
+          <td class="citation">SB 262</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">49</td>
+          <td class="state">Georgia</td>
+          <td class="statute"><a href="https://www.legis.ga.gov/api/legislation/document/20132014/143392" target="_blank" rel="noopener noreferrer">Prohibition on Nude or Sexually Explicit Electronic Transmissions</a></td>
+          <td class="citation">Ga. Code § 16-11-90</td>
+          <td class="effdate">May 2, 2022</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">50</td>
+          <td class="state">Georgia</td>
+          <td class="statute"><a href="https://www.legis.ga.gov/api/legislation/document/20232024/223269" target="_blank" rel="noopener noreferrer">Amendment of Georgia CSAM Law</a></td>
+          <td class="citation">SB 466</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">51</td>
+          <td class="state">Hawaii</td>
+          <td class="statute"><a href="https://data.capitol.hawaii.gov/sessions/session2024/bills/SB2687_CD1_.pdf" target="_blank" rel="noopener noreferrer">Deceptive Media in Election Advertising Advertisements</a></td>
+          <td class="citation">SB 2687</td>
+          <td class="effdate">July 3, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">52</td>
+          <td class="state">Hawaii</td>
+          <td class="statute"><a href="https://data.capitol.hawaii.gov/sessions/session2021/Bills/SB309_SD1_.HTM" target="_blank" rel="noopener noreferrer">Amendment to Intimate Image Law</a></td>
+          <td class="citation">SB 309</td>
+          <td class="effdate">June 23, 2021</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">53</td>
+          <td class="state">Idaho</td>
+          <td class="statute"><a href="https://legislature.idaho.gov/statutesrules/idstat/Title5/T5CH3/SECT5-346/" target="_blank" rel="noopener noreferrer">Relating to Personhood</a></td>
+          <td class="citation">I.C. § 5-346</td>
+          <td class="effdate">July 1, 2022</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">54</td>
+          <td class="state">Idaho</td>
+          <td class="statute"><a href="https://legislature.idaho.gov/statutesrules/idstat/title18/t18ch66/sect18-6606/" target="_blank" rel="noopener noreferrer">Idaho Explicit Synthetic Media law</a></td>
+          <td class="citation">Idaho Code § 18-6606</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">55</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=4015&amp;ChapterID=68" target="_blank" rel="noopener noreferrer">Artificial Intelligence Video Interview Act</a></td>
+          <td class="citation">820 ILCS 42</td>
+          <td class="effdate">January 1, 2020</td>
+          <td class="category">IV. AI in Employment</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">56</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://ilga.gov/Legislation/BillStatus/FullText?LegDocId=185601&amp;DocName=10300HB3773enr&amp;DocNum=3773&amp;DocTypeID=HB&amp;LegID=149031&amp;GAID=17&amp;SessionID=112&amp;SpecSess=&amp;Session=" target="_blank" rel="noopener noreferrer">Amendment to the Illinois Human Rights Act</a></td>
+          <td class="citation">HB 3773</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">IV. AI in Employment</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">57</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://ilga.gov/legislation/publicacts/fulltext.asp?Name=103-0830" target="_blank" rel="noopener noreferrer">Digital Voice and Likeness Protection Act</a></td>
+          <td class="citation">HB 4762</td>
+          <td class="effdate">August 9, 2024</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">58</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://www.ilga.gov/legislation/BillStatus.asp?DocNum=4875&amp;GAID=17&amp;DocTypeID=HB&amp;LegId=152734&amp;SessionID=112&amp;GA=103" target="_blank" rel="noopener noreferrer">Amendment to Right of Publicity Act</a></td>
+          <td class="citation">HB 4875</td>
+          <td class="effdate">August 9, 2024</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">59</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://www.ilga.gov/Documents/Legislation/PublicActs/104/PDF/104-0054.pdf" target="_blank" rel="noopener noreferrer">The Wellness and Oversight for Psychological Resources Act</a></td>
+          <td class="citation">HB1806</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">V. AI in Healthcare; X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">60</td>
+          <td class="state">Illinois</td>
+          <td class="statute"><a href="https://ilga.gov/legislation/103/HB/10300HB4623lv.htm" target="_blank" rel="noopener noreferrer">Amendment to Child Pornography Laws (AI-Generated Images)</a></td>
+          <td class="citation">HB 4623</td>
+          <td class="effdate">August 9, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">61</td>
+          <td class="state">Indiana</td>
+          <td class="statute"><a href="https://iga.in.gov/legislative/2024/bills/house/1047/details" target="_blank" rel="noopener noreferrer">Amendment of Indiana Law Governing Distribution of Intimate Images</a></td>
+          <td class="citation">HB 1047</td>
+          <td class="effdate">March 12, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">62</td>
+          <td class="state">Indiana</td>
+          <td class="statute"><a href="https://iga.in.gov/ic/2024/Title_24/Article_15.pdf" target="_blank" rel="noopener noreferrer">Indiana Consumer Data Protection Making Act</a></td>
+          <td class="citation">Ind. Code. §24-15-1</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">63</td>
+          <td class="state">Iowa</td>
+          <td class="statute"><a href="https://www.legis.iowa.gov/docs/code/2025/708.7.pdf" target="_blank" rel="noopener noreferrer">Harassment</a></td>
+          <td class="citation">Iowa Code § 708.7</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">64</td>
+          <td class="state">Iowa</td>
+          <td class="statute"><a href="https://www.legis.iowa.gov/docs/code/2025/728.12.pdf" target="_blank" rel="noopener noreferrer">Sexual Exploitation of a Minor</a></td>
+          <td class="citation">Iowa Code § 728.12</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">65</td>
+          <td class="state">Kansas</td>
+          <td class="statute"><a href="https://kslegislature.gov/li/b2025_26/measures/documents/hb2313_enrolled.pdf" target="_blank" rel="noopener noreferrer">AI Platforms of Concern</a></td>
+          <td class="citation">SB 2313</td>
+          <td class="effdate">April 8, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">66</td>
+          <td class="state">Kentucky</td>
+          <td class="statute"><a href="https://apps.legislature.ky.gov/recorddocuments/bill/24RS/hb207/bill.pdf" target="_blank" rel="noopener noreferrer">Amendment to CSAM Law</a></td>
+          <td class="citation">HB 207</td>
+          <td class="effdate">March 28, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">67</td>
+          <td class="state">Kentucky</td>
+          <td class="statute"><a href="https://apps.legislature.ky.gov/recorddocuments/bill/24RS/hb207/bill.pdf" target="_blank" rel="noopener noreferrer">Amendment to Intimate Images law</a></td>
+          <td class="citation">HB 207</td>
+          <td class="effdate">March 28, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">68</td>
+          <td class="state">Kentucky</td>
+          <td class="statute"><a href="https://apps.legislature.ky.gov/record/25rs/sb4.html" target="_blank" rel="noopener noreferrer">AI Electioneering Communications Advertising</a></td>
+          <td class="citation">KRS 117.001</td>
+          <td class="effdate">December 1, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">69</td>
+          <td class="state">Kentucky</td>
+          <td class="statute"><a href="https://apps.legislature.ky.gov/record/25rs/sb4.html" target="_blank" rel="noopener noreferrer">Government Use of AI Law</a></td>
+          <td class="citation">KRS 42.720 - 42.742</td>
+          <td class="effdate">December 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">70</td>
+          <td class="state">Kentucky</td>
+          <td class="statute"><a href="https://apps.legislature.ky.gov/law/statutes/chapter.aspx?id=39092" target="_blank" rel="noopener noreferrer">Kentucky Consumer Data Making Protection Act</a></td>
+          <td class="citation">Ky. Rev. Stat. § 367.3611 et seq.</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">71</td>
+          <td class="state">Louisiana</td>
+          <td class="statute"><a href="https://www.legis.la.gov/Legis/ViewDocument.aspx?d=1379408" target="_blank" rel="noopener noreferrer">Louisiana AI Intimate Image Law</a></td>
+          <td class="citation">14 La. Rev. Stat. Ann. §</td>
+          <td class="effdate">August 1, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">72</td>
+          <td class="state">Louisiana</td>
+          <td class="statute"><a href="https://www.legis.la.gov/Legis/ViewDocument.aspx?d=1333325" target="_blank" rel="noopener noreferrer">Louisiana Deepfake Law</a></td>
+          <td class="citation">14 La. Rev. Stat. Ann. §</td>
+          <td class="effdate">August 1, 2023</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images; II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">73</td>
+          <td class="state">Maine</td>
+          <td class="statute"><a href="https://legislature.maine.gov/bills/getPDF.asp?paper=HP1154&amp;item=3&amp;snum=132" target="_blank" rel="noopener noreferrer">Communications with Consumers via AI</a></td>
+          <td class="citation">10 MRSA c. 239</td>
+          <td class="effdate">September 24, 2025</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">74</td>
+          <td class="state">Maryland</td>
+          <td class="statute"><a href="https://mgaleg.maryland.gov/2024RS/bills/hb/hb0567E.pdf" target="_blank" rel="noopener noreferrer">Maryland Online Data Privacy Act Making</a></td>
+          <td class="citation">Md. Code Ann. § 14- 4601 et seq.</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">75</td>
+          <td class="state">Maryland</td>
+          <td class="statute"><a href="https://mgaleg.maryland.gov/2025RS/Chapters_noln/CH_747_hb0820t.pdf" target="_blank" rel="noopener noreferrer">AI Utilization Review</a></td>
+          <td class="citation">Md. Code Ann., Ins. §§</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">76</td>
+          <td class="state">Maryland</td>
+          <td class="statute"><a href="https://casetext.com/statute/code-of-maryland/article-criminal-law/title-11-indecency-and-obscenity/subtitle-2-obscene-matter/section-11-208-possession-of-visual-representation-of-child-under-16-engaged-in-certain-sexual-acts" target="_blank" rel="noopener noreferrer">Amendment to the Maryland CSAM Statute</a></td>
+          <td class="citation">MD. Code., Crim. Law 11-208</td>
+          <td class="effdate">October 1, 2023</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">77</td>
+          <td class="state">Maryland</td>
+          <td class="statute"><a href="https://legiscan.com/MD/text/SB818/id/2998150/Maryland-2024-SB818-Chaptered.pdf" target="_blank" rel="noopener noreferrer">Maryland AI Governance Act of 2024</a></td>
+          <td class="citation">SB 818</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">78</td>
+          <td class="state">Massachusetts</td>
+          <td class="statute"><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2024/Chapter118" target="_blank" rel="noopener noreferrer">Amendment to the Massachusetts Intimate Images Law</a></td>
+          <td class="citation">HB 4744</td>
+          <td class="effdate">June 20, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">79</td>
+          <td class="state">Michigan</td>
+          <td class="statute"><a href="https://www.legislature.mi.gov/documents/2023-2024/publicact/htm/2023-PA-0263.htm" target="_blank" rel="noopener noreferrer">AI Political Disclaimer Law Advertising</a></td>
+          <td class="citation">HB 5141</td>
+          <td class="effdate">February 13, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">80</td>
+          <td class="state">Michigan</td>
+          <td class="statute"><a href="https://www.legislature.mi.gov/documents/2023-2024/publicact/pdf/2023-PA-0265.pdf" target="_blank" rel="noopener noreferrer">AI Political Deepfake Law Advertising</a></td>
+          <td class="citation">HB 5144</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">81</td>
+          <td class="state">Minnesota</td>
+          <td class="statute"><a href="https://www.revisor.mn.gov/bills/bill.php?b=house&amp;f=hf1370&amp;ssn=0&amp;y=2023" target="_blank" rel="noopener noreferrer">Non-Consensual Dissemination of a Deepfake</a></td>
+          <td class="citation">HF 1370</td>
+          <td class="effdate">August 1, 2023</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">82</td>
+          <td class="state">Minnesota</td>
+          <td class="statute"><a href="https://www.revisor.mn.gov/bills/bill.php?view=chrono&amp;b=House&amp;f=HF2432&amp;ssn=0&amp;y=2025" target="_blank" rel="noopener noreferrer">Amendment to the Minnesota CSAM Statute</a></td>
+          <td class="citation">HF2432</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">83</td>
+          <td class="state">Minnesota</td>
+          <td class="statute"><a href="https://www.revisor.mn.gov/bills/bill.php?view=chrono&amp;b=Senate&amp;f=SF4097&amp;ssn=0&amp;y=2023" target="_blank" rel="noopener noreferrer">&amp; Prohibiting Social Media Online Platforms Manipulation Act</a></td>
+          <td class="citation">SF 4097</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">XII-E. Social Media &amp; Platforms</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">84</td>
+          <td class="state">Mississippi</td>
+          <td class="statute"><a href="https://billstatus.ls.state.ms.us/2024/pdf/history/SB/SB2577.xml" target="_blank" rel="noopener noreferrer">AI Political Deepfake Law Advertising</a></td>
+          <td class="citation">SB 2577</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">85</td>
+          <td class="state">Missouri</td>
+          <td class="statute"><a href="https://revisor.mo.gov/main/OneSection.aspx?section=573.010&amp;bid=51065" target="_blank" rel="noopener noreferrer">Pornography and Related Offenses</a></td>
+          <td class="citation">R.S.Mo § 573.010</td>
+          <td class="effdate">28-Aug-22</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">86</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://docs.legmt.gov/download-ticket?ticketId=907ba0c7-2666-4edc-938e-7f66bf3de5cb" target="_blank" rel="noopener noreferrer">Montana Government AI Use Law</a></td>
+          <td class="citation">HB178</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">87</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://archive.legmt.gov/bills/mca/title_0300/chapter_0140/part_0280/sections_index.html" target="_blank" rel="noopener noreferrer">Montana Consumer Data Privacy Making Act</a></td>
+          <td class="citation">Montana Code Ann. § 30-14-2801 et seq.</td>
+          <td class="effdate">October 1, 2024</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">88</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://docs.legmt.gov/download-ticket?ticketId=a64e8bac-75d1-42b8-a672-82870e842ab0" target="_blank" rel="noopener noreferrer">Right to Compute Act Infrastructure</a></td>
+          <td class="citation">SB 212</td>
+          <td class="effdate">April 16, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">89</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://docs.legmt.gov/download-ticket?ticketId=79409647-ee8e-4eda-aceb-c7e125083fda" target="_blank" rel="noopener noreferrer">AI Deepfakes in Elections Advertising</a></td>
+          <td class="citation">SB 25</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">90</td>
+          <td class="state">Nebraska</td>
+          <td class="statute"><a href="https://nebraskalegislature.gov/FloorDocs/108/PDF/Slip/LB1074.pdf" target="_blank" rel="noopener noreferrer">Nebraska Data Privacy Act Making</a></td>
+          <td class="citation">LB 1074</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">91</td>
+          <td class="state">Nebraska</td>
+          <td class="statute"><a href="https://nebraskalegislature.gov/FloorDocs/109/PDF/Slip/LB383.pdf" target="_blank" rel="noopener noreferrer">Amendment of Nebraska CSAM Laws</a></td>
+          <td class="citation">LB 383</td>
+          <td class="effdate">July 1, 2026</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">92</td>
+          <td class="state">Nevada</td>
+          <td class="statute"><a href="https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/11888/Overview" target="_blank" rel="noopener noreferrer">Nevada AI Political Advertising Law Advertising</a></td>
+          <td class="citation">NRS Chapter 294A.347-</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">93</td>
+          <td class="state">New Hampshire</td>
+          <td class="statute"><a href="https://legiscan.com/NH/text/HB1432/id/2864369" target="_blank" rel="noopener noreferrer">New Hampshire Deepfake Act</a></td>
+          <td class="citation">HB 1432</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">II-C. General Deepfake Laws</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">94</td>
+          <td class="state">New Hampshire</td>
+          <td class="statute"><a href="https://legiscan.com/NH/text/HB1596/id/2864639" target="_blank" rel="noopener noreferrer">New Hampshire AI Political Advertising Advertising Law</a></td>
+          <td class="citation">HB 1596</td>
+          <td class="effdate">March 27, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">95</td>
+          <td class="state">New Hampshire</td>
+          <td class="statute"><a href="https://legiscan.com/NH/text/HB1688/id/2864315" target="_blank" rel="noopener noreferrer">New Hampshire State Agency AI Bill</a></td>
+          <td class="citation">HB 1688</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">96</td>
+          <td class="state">New Hampshire</td>
+          <td class="statute"><a href="https://gc.nh.gov/rsa/html/NHTOC/NHTOC-LII-507-H.htm" target="_blank" rel="noopener noreferrer">New Hampshire Privacy Act Making</a></td>
+          <td class="citation">N.H. Rev. Stat. § 507- H:8</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">97</td>
+          <td class="state">New Hampshire</td>
+          <td class="statute"><a href="https://gc.nh.gov/bill_status/pdf.aspx?id=17004&amp;q=billVersion" target="_blank" rel="noopener noreferrer">Responsive Generative Communication Law</a></td>
+          <td class="citation">New Hampshire Chapter 270:1</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">98</td>
+          <td class="state">New Jersey</td>
+          <td class="statute"><a href="https://pub.njleg.state.nj.us/Bills/2024/A4000/3540_R3.PDF" target="_blank" rel="noopener noreferrer">Establishes criminal penalties for production or dissemination of “deepfakes.”</a></td>
+          <td class="citation">A3540</td>
+          <td class="effdate">April 2, 2025</td>
+          <td class="category">II-C. General Deepfake Laws</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">99</td>
+          <td class="state">New Jersey</td>
+          <td class="statute"><a href="https://pub.njleg.state.nj.us/Bills/2022/PL23/266_.PDF" target="_blank" rel="noopener noreferrer">New Jersey Data Privacy Act Making</a></td>
+          <td class="citation">N.J. Rev. Stat. § 56:8- 166.4 et. seq.</td>
+          <td class="effdate">January 15, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">100</td>
+          <td class="state">New Jersey</td>
+          <td class="statute"><a href="https://www.njoag.gov/wp-content/uploads/2025/12/N.J.A.C.-13-16-Disparate-Impact-Discrimination.pdf" target="_blank" rel="noopener noreferrer">Rules Pertaining to Disparate Impact Discrimination (N.J.A.C. 13:16)</a></td>
+          <td class="citation">N.J.A.C. 13:16</td>
+          <td class="effdate">December 15, 2025</td>
+          <td class="category">IV. AI in Employment</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">101</td>
+          <td class="state">New Jersey</td>
+          <td class="statute"><a href="https://www.njleg.state.nj.us/bill-search/2024/S3432" target="_blank" rel="noopener noreferrer">Next New Jersey Program Act</a></td>
+          <td class="citation">S3432</td>
+          <td class="effdate">July 25, 2024</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">102</td>
+          <td class="state">New Mexico</td>
+          <td class="statute"><a href="https://www.nmlegis.gov/Legislation/Legislation?chamber=H&amp;legtype=B&amp;legno=182&amp;year=24" target="_blank" rel="noopener noreferrer">New Mexico Campaign Reporting Advertising Act Amendment</a></td>
+          <td class="citation">N.M. Stat. Ann. § 1-19-</td>
+          <td class="effdate">May 15, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">103</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://legistar.council.nyc.gov/LegislationDetail.aspx?ID=4344524&amp;GUID=B051915D-A9AC-451E-81F8-6596032FA3F9&amp;Options=ID%7cText%7c&amp;Search=" target="_blank" rel="noopener noreferrer">NYC AI Employment Law</a></td>
+          <td class="citation">(Local Law 144)</td>
+          <td class="effdate">January 1, 2023</td>
+          <td class="category">IV. AI in Employment</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">104</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/A433" target="_blank" rel="noopener noreferrer">Automated Employment Decision- Making in State Government</a></td>
+          <td class="citation">A433</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">105</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/laws/GOB/5-302" target="_blank" rel="noopener noreferrer">Contracts for the Creation and Use of Digital Replicas</a></td>
+          <td class="citation">General Obligations CHAPTER 24-A, ARTICLE 5, TITLE 3</td>
+          <td class="effdate">January 1, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">106</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/laws/CVR/50" target="_blank" rel="noopener noreferrer">Artificial Intelligence Deceptive Practices Act</a></td>
+          <td class="citation">N.Y. Civ. Rights Law § 50 et seq.</td>
+          <td class="effdate">April 20, 2024</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">107</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/laws/ELN/14-106" target="_blank" rel="noopener noreferrer">Artificial Intelligence Deceptive Advertising Practices Act</a></td>
+          <td class="citation">N.Y. Election Law § 14-</td>
+          <td class="effdate">April 20, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">108</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/laws/GBS/A47" target="_blank" rel="noopener noreferrer">Artificial Intelligence Companion Models</a></td>
+          <td class="citation">New York General Business Law Article 47</td>
+          <td class="effdate">November 5, 2025</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">109</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2023/S7543/amendment/B" target="_blank" rel="noopener noreferrer">Making in Government Act</a></td>
+          <td class="citation">S 7543B</td>
+          <td class="effdate">December 21, 2024</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">110</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://legislation.nysenate.gov/pdf/bills/2023/S9832" target="_blank" rel="noopener noreferrer">New York State Fashion Workers Act</a></td>
+          <td class="citation">S 9832</td>
+          <td class="effdate">June 19, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">111</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/S8391" target="_blank" rel="noopener noreferrer">Amendment to Deceased Personality Protections</a></td>
+          <td class="citation">S8391</td>
+          <td class="effdate">December 11, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">112</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/S8420/amendment/A" target="_blank" rel="noopener noreferrer">Synthetic Performer Disclosures</a></td>
+          <td class="citation">S8420A</td>
+          <td class="effdate">June 9, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">113</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2023/S1042/amendment/A" target="_blank" rel="noopener noreferrer">Amendment to the New York Statute Prohibiting Unlawful Dissemination or Publication of Intimate Images</a></td>
+          <td class="citation">SB 1042A</td>
+          <td class="effdate">November 28, 2023</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">114</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/S6953/amendment/B" target="_blank" rel="noopener noreferrer">Responsible AI Safety and Education (RAISE) Act</a></td>
+          <td class="citation">S. 3954B</td>
+          <td class="effdate">March 19, 2026</td>
+          <td class="category">XI. Frontier &amp; General-Purpose AI</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">115</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/S8420/amendment/A" target="_blank" rel="noopener noreferrer">Synthetic Performer Disclosures Law</a></td>
+          <td class="citation">S. 8420</td>
+          <td class="effdate">June 9, 2026</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">116</td>
+          <td class="state">North Carolina</td>
+          <td class="statute"><a href="https://www.ncleg.gov/BillLookup/2023/H591" target="_blank" rel="noopener noreferrer">Amendment of North Carolina CSAM Laws</a></td>
+          <td class="citation">HB 591</td>
+          <td class="effdate">December 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">117</td>
+          <td class="state">North Carolina</td>
+          <td class="statute"><a href="https://www.ncleg.gov/BillLookup/2023/H591" target="_blank" rel="noopener noreferrer">North Carolina Intimate Images Laws</a></td>
+          <td class="citation">HB 591</td>
+          <td class="effdate">December 1, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">118</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-0034-05000.pdf" target="_blank" rel="noopener noreferrer">An Act Relating to Sexually Expressive Images</a></td>
+          <td class="citation">N.D. Cent. Code § 12.1-</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">119</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-0529-05000.pdf" target="_blank" rel="noopener noreferrer">AI Political Advertising Disclaimer Advertising Law</a></td>
+          <td class="citation">ND Century Code, Chapter 16.1-10</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">120</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-1064-05000.pdf" target="_blank" rel="noopener noreferrer">North Dakota Unmanned Aerial Vehicle and Robot Law</a></td>
+          <td class="citation">North Dakota Century Code 29-29.4-01 to 06</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">121</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-1064-05000.pdf" target="_blank" rel="noopener noreferrer">AI CSAM Amendments</a></td>
+          <td class="citation">North Dakota Century Code Section 12.1- 27.2-01 and 12.1-27.2-</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">122</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-1064-05000.pdf" target="_blank" rel="noopener noreferrer">North Dakota Harassment Law</a></td>
+          <td class="citation">North Dakota Century Code Section 12.1-17- 07</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">123</td>
+          <td class="state">North Dakota</td>
+          <td class="statute"><a href="https://ndlegis.gov/assembly/69-2025/regular/documents/25-1064-05000.pdf" target="_blank" rel="noopener noreferrer">North Dakota Stalking Law</a></td>
+          <td class="citation">North Dakota Century Code Section 12.1-17- 07.1</td>
+          <td class="effdate">August 1, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">124</td>
+          <td class="state">Oklahoma</td>
+          <td class="statute"><a href="https://www.oklegislature.gov/BillInfo.aspx?Bill=hb3642&amp;Session=2400" target="_blank" rel="noopener noreferrer">Amendment to Oklahoma CSAM Laws</a></td>
+          <td class="citation">HB 3642</td>
+          <td class="effdate">November 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">125</td>
+          <td class="state">Oklahoma</td>
+          <td class="statute"><a href="https://www.oklegislature.gov/cf_pdf/2025-26 ENR/hB/HB1364 ENR.PDF" target="_blank" rel="noopener noreferrer">Amendment of Oklahoma Law Governing Distribution of Intimate Images</a></td>
+          <td class="citation">Section 1040.13b</td>
+          <td class="effdate">November 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">126</td>
+          <td class="state">Oregon</td>
+          <td class="statute"><a href="https://olis.oregonlegislature.gov/liz/2024R1/Measures/Overview/SB1571" target="_blank" rel="noopener noreferrer">Use of AI in Campaign Advertising Communications Law</a></td>
+          <td class="citation">SB 1571</td>
+          <td class="effdate">March 27, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">127</td>
+          <td class="state">Oregon</td>
+          <td class="statute"><a href="https://olis.oregonlegislature.gov/liz/2023R1/Downloads/MeasureDocument/SB619/Enrolled" target="_blank" rel="noopener noreferrer">Oregon Consumer Privacy Act Making</a></td>
+          <td class="citation">SB 619</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">128</td>
+          <td class="state">Pennsylvania</td>
+          <td class="statute"><a href="https://www.legis.state.pa.us/CFDOCS/Legis/PN/Public/btCheck.cfm?txtType=PDF&amp;sessYr=2023&amp;sessInd=0&amp;billBody=S&amp;billTyp=B&amp;billNbr=1213&amp;pn=1946" target="_blank" rel="noopener noreferrer">Amendment of Pennsylvania CSAM Laws</a></td>
+          <td class="citation">SB 1213</td>
+          <td class="effdate">December 28, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">129</td>
+          <td class="state">Pennsylvania</td>
+          <td class="statute"><a href="https://www.legis.state.pa.us/CFDOCS/Legis/PN/Public/btCheck.cfm?txtType=PDF&amp;sessYr=2023&amp;sessInd=0&amp;billBody=S&amp;billTyp=B&amp;billNbr=1213&amp;pn=1946" target="_blank" rel="noopener noreferrer">Amendment of Pennsylvania Intimate Images Laws</a></td>
+          <td class="citation">SB 1213</td>
+          <td class="effdate">December 28, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">130</td>
+          <td class="state">Rhode Island</td>
+          <td class="statute"><a href="https://www.scstatehouse.gov/code/t40c057.php" target="_blank" rel="noopener noreferrer">Deceptive and Fraudulent Advertising Synthetic Media in Election Communications</a></td>
+          <td class="citation">S.C. Code Ann. § 40-57-</td>
+          <td class="effdate">July 2, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">131</td>
+          <td class="state">Rhode Island</td>
+          <td class="statute"><a href="https://advance.lexis.com/api/document/collection/statutes-legislation/id/68FT-J0C0-R03K-04F9-00008-00?cite=Tenn.%20Code%20Ann.%20%C2%A7%2047-18-3301&amp;context=1000516" target="_blank" rel="noopener noreferrer">Rhode Island Data Transparency Making and Privacy Protection Act</a></td>
+          <td class="citation">Tenn. Code. Ann. § 47-</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">132</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://capitol.texas.gov/tlodocs/89R/billtext/pdf/HB00149F.pdf" target="_blank" rel="noopener noreferrer">Financial Abuse Using Artificially Generated Media or Phishing</a></td>
+          <td class="citation">HB 149</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">II-C. General Deepfake Laws</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">133</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://capitol.texas.gov/BillLookup/Text.aspx?LegSess=88R&amp;Bill=HB2700" target="_blank" rel="noopener noreferrer">Artificial Intelligence in Electronic Health Record</a></td>
+          <td class="citation">HB 2700</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">134</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://capitol.texas.gov/tlodocs/89R/billtext/pdf/SB00441F.pdf" target="_blank" rel="noopener noreferrer">Act Relating to the Regulation and Use of AI by Governmental Entities</a></td>
+          <td class="citation">HB 441</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">135</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://capitol.texas.gov/tlodocs/89R/billtext/pdf/SB00441F.pdf" target="_blank" rel="noopener noreferrer">Amendment to the CSAM Statutes</a></td>
+          <td class="citation">HB 441</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">136</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://capitol.texas.gov/tlodocs/89R/billtext/pdf/HB00581F.pdf" target="_blank" rel="noopener noreferrer">Visual Material Appearing to Depict a Child</a></td>
+          <td class="citation">HB 581</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">137</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/SB1361/2023" target="_blank" rel="noopener noreferrer">Use of Automated Decision System for Adverse Determinations</a></td>
+          <td class="citation">SB 1361</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">138</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/~2024/bills/static/HB0148.html" target="_blank" rel="noopener noreferrer">Artificial Pornographic Images Amendments</a></td>
+          <td class="citation">HB 148</td>
+          <td class="effdate">May 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM; II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">139</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/~2024/bills/static/HB0238.html" target="_blank" rel="noopener noreferrer">Sexually Explicit Minor Amendments</a></td>
+          <td class="citation">HB 238</td>
+          <td class="effdate">May 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">140</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/~2024/bills/static/SB0131.html" target="_blank" rel="noopener noreferrer">Utah Information Technology Act Advertising</a></td>
+          <td class="citation">SB 131</td>
+          <td class="effdate">May 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">141</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/~2024/bills/static/SB0149.html" target="_blank" rel="noopener noreferrer">Utah Artificial Intelligence Policy Act</a></td>
+          <td class="citation">SB 149</td>
+          <td class="effdate">May 1, 2024</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">142</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/~2025/bills/static/SB0226.html" target="_blank" rel="noopener noreferrer">Artificial Intelligence Consumer Protection Amendments</a></td>
+          <td class="citation">SB 226</td>
+          <td class="effdate">2025-05-07 00:00:00</td>
+          <td class="category"></td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">143</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0271.pdf" target="_blank" rel="noopener noreferrer">Utah Artificial Intelligence Policy Act</a></td>
+          <td class="citation">Utah Code § 13-72- 301 et seq.</td>
+          <td class="effdate">May 1, 2024</td>
+          <td class="category">XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">144</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0452.pdf" target="_blank" rel="noopener noreferrer">AI Applications Related to Mental Health</a></td>
+          <td class="citation">Utah Code § 13-72a- 101</td>
+          <td class="effdate">May 7, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">145</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/Session/2025/bills/introduced/SB0226.pdf" target="_blank" rel="noopener noreferrer">Artificial Intelligence Consumer Protection Amendments</a></td>
+          <td class="citation">Utah Code § 13-75- 101 to 106</td>
+          <td class="effdate">May 7, 2025</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots; XII-D. Liability/Ownership/Privacy/Defs</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">146</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0271.pdf" target="_blank" rel="noopener noreferrer">Unauthorized Artificial Intelligence Impersonation Amendments</a></td>
+          <td class="citation">Utah Code § 45-3-2 et.</td>
+          <td class="effdate">May 7, 2025</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">147</td>
+          <td class="state">Utah</td>
+          <td class="statute"><a href="https://le.utah.gov/Session/2025/bills/enrolled/SB0180.pdf" target="_blank" rel="noopener noreferrer">Law Enforcement Usage of Artificial Intelligence</a></td>
+          <td class="citation">Utah Code § 53-25- 601 to 602</td>
+          <td class="effdate">May 7, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">148</td>
+          <td class="state">Vermont</td>
+          <td class="statute"><a href="https://legislature.vermont.gov/bill/status/2022/H.0410" target="_blank" rel="noopener noreferrer">An Act Relating to the Use and Oversight of AI in State Government</a></td>
+          <td class="citation">H 410</td>
+          <td class="effdate">July 1, 2022</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">149</td>
+          <td class="state">Virginia</td>
+          <td class="statute"><a href="https://legacylis.virginia.gov/cgi-bin/legp604.exe?191+ful+CHAP0490+pdf" target="_blank" rel="noopener noreferrer">Amendment to the Unlawful Dissemination of Images of Another Statute</a></td>
+          <td class="citation">B 2678</td>
+          <td class="effdate">July 1, 2019</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">150</td>
+          <td class="state">Virginia</td>
+          <td class="statute"><a href="https://lis.blob.core.windows.net/files/1079123.PDF" target="_blank" rel="noopener noreferrer">Artificial Intelligence-Based Tools</a></td>
+          <td class="citation">Code of Virginia, Section 19.2-11.14</td>
+          <td class="effdate">June 6, 2025</td>
+          <td class="category">VII. AI in Government</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">151</td>
+          <td class="state">Virginia</td>
+          <td class="statute"><a href="https://legacylis.virginia.gov/cgi-bin/legp604.exe?241+ful+CHAP0262+pdf" target="_blank" rel="noopener noreferrer">Amendment to CSAM statute</a></td>
+          <td class="citation">SB 731</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">152</td>
+          <td class="state">Virginia</td>
+          <td class="statute"><a href="https://law.lis.virginia.gov/vacode/title32.1/chapter5/section32.1-127/" target="_blank" rel="noopener noreferrer">Hospital / Nursing Home Virtual Assistant Law</a></td>
+          <td class="citation">Va. Code Ann. § 32.1- 127</td>
+          <td class="effdate">July 1, 2021</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">153</td>
+          <td class="state">Virginia</td>
+          <td class="statute"><a href="https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-577/" target="_blank" rel="noopener noreferrer">Virginia Consumer Data Protection Making Act</a></td>
+          <td class="citation">Va. Code Ann. § 59.1- 577A(A)(5)</td>
+          <td class="effdate">January 1, 2023</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">154</td>
+          <td class="state">Wisconsin</td>
+          <td class="statute"><a href="https://legiscan.com/WI/text/SB314/id/2817005" target="_blank" rel="noopener noreferrer">Amendment to the CSAM Statute</a></td>
+          <td class="citation">SB 314</td>
+          <td class="effdate">October 4, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">155</td>
+          <td class="state">Wisconsin</td>
+          <td class="statute"><a href="https://docs.legis.wisconsin.gov/statutes/statutes/11/xiii/1303" target="_blank" rel="noopener noreferrer">2023 Wisconsin Act 123 Advertising</a></td>
+          <td class="citation">Wis. Stat. § 11.1303</td>
+          <td class="effdate">March 23, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">156</td>
+          <td class="state">Wisconsin</td>
+          <td class="statute"><a href="https://docs.legis.wisconsin.gov/2025/related/acts/69" target="_blank" rel="noopener noreferrer">Advertising Enhanced by Technology Law</a></td>
+          <td class="citation">Wis. Stat. § 452.136(1m)</td>
+          <td class="effdate">January 1, 2027</td>
+          <td class="category">XII-B. AI in Real Estate</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">157</td>
+          <td class="state">Wyoming</td>
+          <td class="statute"><a href="https://www.wyoleg.gov/Legislation/2021/hb0085" target="_blank" rel="noopener noreferrer">Amendment to Intimate Image Law</a></td>
+          <td class="citation">Wy. Code § 6-4-306</td>
+          <td class="effdate">July 1, 2021</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">158</td>
+          <td class="state">Wyoming</td>
+          <td class="statute"><a href="https://law.justia.com/codes/wyoming/title-6/chapter-4/article-3/section-6-4-303/" target="_blank" rel="noopener noreferrer">Sexual Exploitation of Children</a></td>
+          <td class="citation">Wy. Code § 6-4-303</td>
+          <td class="effdate">1-Jul-24</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">159</td>
+          <td class="state">Nevada</td>
+          <td class="statute"><a href="https://legiscan.com/NV/text/AB406/id/3248527" target="_blank" rel="noopener noreferrer">AI for School Counseling</a></td>
+          <td class="citation">Chapter 391 of NRS</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">XII-F. Additional Provisions</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">160</td>
+          <td class="state">Nevada</td>
+          <td class="statute"><a href="https://legiscan.com/NV/text/AB406/id/3248527" target="_blank" rel="noopener noreferrer">General AI Chatbots and Mental Health Services</a></td>
+          <td class="citation">Nev. Rev. Stat. Chapter 433</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">161</td>
+          <td class="state">Nevada</td>
+          <td class="statute"><a href="https://legiscan.com/NV/text/AB406/id/3248527" target="_blank" rel="noopener noreferrer">AI for Mental and Behavioral Health Care</a></td>
+          <td class="citation">Nev. Rev. Stat. Chapter 629</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">V. AI in Healthcare</td>
+          <td class="bucket-cell"><span class="bucket bucket-mixed">MIXED</span></td>
+        </tr>
+        <tr>
+          <td class="num">162</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://bills.legmt.gov/#/laws/bill/2/LC3972?open_tab=bill" target="_blank" rel="noopener noreferrer">Privacy in Communications Law</a></td>
+          <td class="citation">MCA Section 45-8-213</td>
+          <td class="effdate">October 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">163</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQDtRbaJedonTLqDjwACIudDAeYHP7CWSZ-8sgd8-ighcN8?e=6b2cZd" target="_blank" rel="noopener noreferrer">Property Right in Use of Names, Voices, and Visual Likenesses</a></td>
+          <td class="citation">MCA Title 30, Chapter 14, Section 1</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">164</td>
+          <td class="state">Montana</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQANkfWtDuapQq-DkYm8ilWNAXvFajXvwwacLy243ZGp2b4?e=EZ50SM" target="_blank" rel="noopener noreferrer">Montana Explicit Synthetic Media Law</a></td>
+          <td class="citation">MCA Title 45, Chapter 5, Part 6</td>
+          <td class="effdate">May 12, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">165</td>
+          <td class="state">Minnesota</td>
+          <td class="statute"><a href="https://www.revisor.mn.gov/bills/93/2024/0/HF/4757/" target="_blank" rel="noopener noreferrer">Minnesota Consumer Data Privacy Making Act</a></td>
+          <td class="citation">Minn. Stat. § 325O et seq.</td>
+          <td class="effdate">July 31, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">166</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQA85Q8oaHezToQOFeiEh3pQAb0Hr8jsOCBY4iIySs9ysas?e=hVdr6y" target="_blank" rel="noopener noreferrer">Colorado AI Act As amended by SB205-004</a></td>
+          <td class="citation">Co. Rev. Stat. § 6-1- 1701 et seq. Reprinted from Westlaw with the permission of Thomson Reuters.</td>
+          <td class="effdate">June 30, 2026</td>
+          <td class="category">XI. Comprehensive AI Governance</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">167</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQA85Q8oaHezToQOFeiEh3pQAb0Hr8jsOCBY4iIySs9ysas?e=hVdr6y" target="_blank" rel="noopener noreferrer">Colorado Candidate Election Advertising Deepfake Disclosures Law</a></td>
+          <td class="citation">Co. Rev. Stat. 1-45- 111.5 to 111.7 and 1- 46-101 to 106 Reprinted from Westlaw with the permission of Thomson Reuters.</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">168</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQA85Q8oaHezToQOFeiEh3pQAb0Hr8jsOCBY4iIySs9ysas?e=hVdr6y" target="_blank" rel="noopener noreferrer">Colorado Protecting Consumers from Unfair Discrimination in Insurance Practices</a></td>
+          <td class="citation">Co. Rev. Stat. 10-3- 1104.9 Reprinted from Westlaw with the permission of Thomson Reuters.</td>
+          <td class="effdate">July 6, 2021</td>
+          <td class="category">XII-C. AI in Insurance</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">169</td>
+          <td class="state">Colorado</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQCsQxQqPPS9SK6LWoTqQgYZAcmYgIgq0MfkRcgUsBrpMRU?e=r142fT" target="_blank" rel="noopener noreferrer">Colorado Privacy Act Making</a></td>
+          <td class="citation">Col. Rev. Stat. § 6-1- 1301 et seq. Reprinted from Westlaw with the permission of Thomson Reuters.</td>
+          <td class="effdate">July 1, 2023</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">170</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQAwN3brYyV_TKKzN46Ya5uKAYLv4PzgIkIggGyNWezAwE8?e=meRMNP" target="_blank" rel="noopener noreferrer">California Bot Act</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 17940 –17943</td>
+          <td class="effdate">July 1, 2019</td>
+          <td class="category">X. User-Facing AI &amp; Chatbots</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">171</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQAwN3brYyV_TKKzN46Ya5uKAYLv4PzgIkIggGyNWezAwE8?e=meRMNP" target="_blank" rel="noopener noreferrer">California AI Transparency Act As Amended by AB 853 (2025)</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 22757 et seq.</td>
+          <td class="effdate">August 2, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">172</td>
+          <td class="state">California</td>
+          <td class="statute"><a href="https://1drv.ms/b/c/d501ff05b8d0dd63/IQAwN3brYyV_TKKzN46Ya5uKAYLv4PzgIkIggGyNWezAwE8?e=meRMNP" target="_blank" rel="noopener noreferrer">Act Online Platforms As Amended by AB 853 (2025)</a></td>
+          <td class="citation">Cal. Bus. &amp; Prof. Code § 22757 et seq.</td>
+          <td class="effdate">August 2, 2026</td>
+          <td class="category">IX. AI Transparency</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">173</td>
+          <td class="state">Arizona</td>
+          <td class="statute"><a href="https://www.azleg.gov/legtext/57leg/1R/laws/0106.pdf" target="_blank" rel="noopener noreferrer">Amendment of Arizona Intimate Images Law</a></td>
+          <td class="citation">Arizona Revised Statutes Section 13- 1425</td>
+          <td class="effdate">September 25, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">174</td>
+          <td class="state">West Virginia</td>
+          <td class="statute"><a href="https://www.wvlegislature.gov/bill_status/bills_text.cfm?billdoc=sb198%20sub1%20enr.htm&amp;yr=2025&amp;sesstype=RS&amp;billtype=B&amp;houseorig=S&amp;i=198" target="_blank" rel="noopener noreferrer">Crimes Against Chastity, Morality and Decency - CSAM</a></td>
+          <td class="citation">§61-8-28a</td>
+          <td class="effdate">July 9, 2025</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">175</td>
+          <td class="state">West Virginia</td>
+          <td class="statute"><a href="https://www.wvlegislature.gov/bill_status/bills_text.cfm?billdoc=sb198%20sub1%20enr.htm&amp;yr=2025&amp;sesstype=RS&amp;billtype=B&amp;houseorig=S&amp;i=198" target="_blank" rel="noopener noreferrer">Crimes Against Chastity, Morality and Decency - Intimate Images</a></td>
+          <td class="citation">§61-8-28a</td>
+          <td class="effdate">July 9, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">176</td>
+          <td class="state">Washington</td>
+          <td class="statute"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=9A.86.030" target="_blank" rel="noopener noreferrer">Amendment of Washington Intimate Image Laws</a></td>
+          <td class="citation">RCW 9A.86.030</td>
+          <td class="effdate">June 6, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">177</td>
+          <td class="state">Washington</td>
+          <td class="statute"><a href="https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1999-S.SL.pdf?q=20241030184202" target="_blank" rel="noopener noreferrer">Amendment of Washington CSAM Laws</a></td>
+          <td class="citation">https://lawfilesext.leg.wa.gov/biennium/2023-24/Pdf/Bills/Session%20Laws/House/1999-S.SL.pdf?q=20241030184202</td>
+          <td class="effdate">June 6, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">178</td>
+          <td class="state">Vermont</td>
+          <td class="statute"><a href="https://legislature.vermont.gov/Documents/2024/Docs/ACTS/ACT161/ACT161%20As%20Enacted.pdf" target="_blank" rel="noopener noreferrer">Amendment of non-consensual sexual image dissemination statute</a></td>
+          <td class="citation">Wy. Code § 6-4-306</td>
+          <td class="effdate">June 6, 2024</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">179</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/HB3133/2025" target="_blank" rel="noopener noreferrer">&amp; Unlawful Production or Distribution Online Platforms of Certain Sexually Explicit Material</a></td>
+          <td class="citation">H 878</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">XII-E. Social Media &amp; Platforms</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">180</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/HB581/2025" target="_blank" rel="noopener noreferrer">AI Sexual Material Harmful to Minors</a></td>
+          <td class="citation">HB 1999</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">181</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/SB441/2025" target="_blank" rel="noopener noreferrer">Unlawful Production or Distribution of Certain Sexually Explicit Material</a></td>
+          <td class="citation">HB 1999</td>
+          <td class="effdate">September 1, 2025</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">182</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/SB20/2025" target="_blank" rel="noopener noreferrer">Amendment of Texas CSAM Laws</a></td>
+          <td class="citation">SB 198</td>
+          <td class="effdate">September 1, 2023</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">183</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/HB149/2025" target="_blank" rel="noopener noreferrer">Texas Responsible Artificial Intelligence Governance Act (TRAIGA)</a></td>
+          <td class="citation">SB 198</td>
+          <td class="effdate">January 1, 2026</td>
+          <td class="category">XI. Comprehensive AI Governance</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">184</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://www.sll.texas.gov/spotlight/2024/07/texas-data-privacy-and-security-act/" target="_blank" rel="noopener noreferrer">Texas Data Privacy and Security Making Act</a></td>
+          <td class="citation">Wy. Code § 6-4-303</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">185</td>
+          <td class="state">Texas</td>
+          <td class="statute"><a href="https://legiscan.com/TX/bill/SB441/2025" target="_blank" rel="noopener noreferrer">Unlawful Distribution of Sexually Explicit Videos</a></td>
+          <td class="citation">Wy. Code § 6-4-306</td>
+          <td class="effdate">September 1, 2023</td>
+          <td class="category">II-A. Non-Consensual AI Intimate Images</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">186</td>
+          <td class="state">Tennessee</td>
+          <td class="statute"><a href="https://www.capitol.tn.gov/Bills/113/Bill/HB2091.pdf" target="_blank" rel="noopener noreferrer">Ensuring Likeness, Voice, and Image Security (ELVIS) Act of 2024</a></td>
+          <td class="citation">SB 1188</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">VIII. AI Likeness &amp; Publicity</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">187</td>
+          <td class="state">Tennessee</td>
+          <td class="statute"><a href="https://legiscan.com/TN/bill/HB1181/2023" target="_blank" rel="noopener noreferrer">Tennessee Information Protection Making Act</a></td>
+          <td class="citation">SB 2373</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">VI. Automated Decision-Making</td>
+          <td class="bucket-cell"><span class="bucket bucket-process">PROCESS</span></td>
+        </tr>
+        <tr>
+          <td class="num">188</td>
+          <td class="state">Tennessee</td>
+          <td class="statute"><a href="https://publications.tnsosfiles.com/acts/113/pub/pc0911.pdf" target="_blank" rel="noopener noreferrer">Amendment of Tennessee CSAM Laws</a></td>
+          <td class="citation">SB 815</td>
+          <td class="effdate">July 1, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">189</td>
+          <td class="state">South Dakota</td>
+          <td class="statute"><a href="https://sdlegislature.gov/Session/Bill/26046/284327" target="_blank" rel="noopener noreferrer">An Act to Prohibit the Use of a Advertising Deepfake to Influence an Election</a></td>
+          <td class="citation">SB 1621</td>
+          <td class="effdate">July 1, 2025</td>
+          <td class="category">III. Elections &amp; Political Advertising</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">190</td>
+          <td class="state">South Dakota</td>
+          <td class="statute"><a href="https://legiscan.com/SD/text/SB79/2024" target="_blank" rel="noopener noreferrer">Amendment of South Dakota CSAM Laws</a></td>
+          <td class="citation">SB 20</td>
+          <td class="effdate">February 12, 2024</td>
+          <td class="category">II-B. AI-Generated CSAM</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">191</td>
+          <td class="state">South Carolina</td>
+          <td class="statute"><a href="https://www.scstatehouse.gov/sess125_2023-2024/bills/4754.htm" target="_blank" rel="noopener noreferrer">Real Estate AI Responsibility Law</a></td>
+          <td class="citation">Chapter 2054, Government Code, Subchapter S</td>
+          <td class="effdate">May 21, 2024</td>
+          <td class="category">XII-B. AI in Real Estate</td>
+          <td class="bucket-cell"><span class="bucket bucket-output">OUTPUT</span></td>
+        </tr>
+        <tr>
+          <td class="num">192</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/laws/GBS/349-A" target="_blank" rel="noopener noreferrer">New York Algorithmic Pricing Disclosure Act</a></td>
+          <td class="citation">New York General Business Law Article 22-A,§ 349-A</td>
+          <td class="effdate">November 10, 2025</td>
+          <td class="category">XII-A. Algorithmic Pricing</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+        <tr>
+          <td class="num">193</td>
+          <td class="state">New York</td>
+          <td class="statute"><a href="https://www.nysenate.gov/legislation/bills/2025/S7882" target="_blank" rel="noopener noreferrer">New York Landlord Algorithmic Pricing Law</a></td>
+          <td class="citation">New York General Business Law Article 22,§ 340-B</td>
+          <td class="effdate">December 15, 2025</td>
+          <td class="category">XII-A. Algorithmic Pricing</td>
+          <td class="bucket-cell"><span class="bucket bucket-conduct">CONDUCT</span></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p class="footer-note">
+    Total N = 193 enacted state AI statutes. New York City Local Law 144, a municipal ordinance, is excluded from this count and appears elsewhere in the Note as a comparator.
+  </p>
+
+</body>
+</html>
