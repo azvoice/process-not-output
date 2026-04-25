@@ -2,168 +2,221 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Figure 1 — Bucket-Count Summary (193 Enacted State AI Laws)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 1 — Bucket-Count Summary of 193 Enacted State AI Laws</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: "Times New Roman", Georgia, serif;
-    background: #ffffff;
-    color: #1a1a1a;
-    max-width: 780px;
-    margin: 40px auto;
-    padding: 0 30px;
-    line-height: 1.5;
-  }
-  .figure-caption {
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #1a1a1a;
-  }
-  .figure-title {
-    font-size: 15px;
-    font-style: italic;
-    margin-bottom: 20px;
-    color: #1a1a1a;
-  }
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .stat-card {
-    border: 1px solid #c8c8c8;
-    border-radius: 6px;
-    padding: 14px;
-    text-align: center;
-  }
-  .stat-card .label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #555555;
-    margin-bottom: 6px;
-  }
-  .stat-card .count {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1a1a1a;
-  }
-  .stat-card .pct {
-    font-size: 13px;
-    color: #555555;
-    margin-top: 2px;
-  }
-  .stat-card.conduct  { border-left: 4px solid #2E7D5B; }
-  .stat-card.output   { border-left: 4px solid #A32D2D; }
-  .stat-card.process  { border-left: 4px solid #3C3489; }
-  .stat-card.mixed    { border-left: 4px solid #8B5A00; }
-  .chart-wrap {
-    position: relative;
-    width: 100%;
-    height: 320px;
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    padding: 16px;
-    box-sizing: border-box;
-  }
-  .footer-note {
-    font-size: 11px;
-    font-style: italic;
-    color: #555555;
-    margin-top: 14px;
-  }
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #888;
+  --paper: #faf8f3;
+  --paper-card: #ffffff;
+  --rule: #d4cfc0;
+  --rule-strong: #8b8780;
+  --accent: #6b2424;
+  --process: #2c5582;
+  --output: #8b1a1a;
+  --conduct: #4a6b4a;
+  --mixed: #8b5a1a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+.masthead {
+  border-top: 4px double var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+.kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-family: "EB Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+.preface {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 2rem auto 2.5rem;
+  max-width: 760px;
+}
+.preface p { margin-bottom: 0.75rem; }
+.preface p:last-child { margin-bottom: 0; }
+.footer {
+  margin: 3.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  max-width: 760px;
+  text-align: center;
+}
+@media print {
+  body { background: white; font-size: 10pt; }
+  .container { padding: 1rem; max-width: none; }
+}
+
+.figure-block {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  padding: 2rem 1.5rem 1.5rem;
+  margin: 0 auto 2.5rem;
+  max-width: 880px;
+}
+.figure-caption {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  margin-top: 1rem;
+}
+.bucket-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 880px;
+  margin: 0 auto 2.5rem;
+}
+.bucket-card {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  border-left: 4px solid;
+  padding: 1.1rem 1.3rem;
+}
+.bucket-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dotted var(--rule);
+  padding-bottom: 0.4rem;
+}
+.bucket-name {
+  font-family: "EB Garamond", serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.bucket-numbers {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bucket-desc {
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.summary-line {
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 1.5rem auto;
+  max-width: 760px;
+  font-size: 1rem;
+}
+@media (max-width: 700px) {
+  .bucket-cards { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-  <div class="figure-caption">FIGURE 1.</div>
-  <div class="figure-title">Bucket-count summary of 193 enacted state AI laws, tagged by regulatory modality.</div>
+<div class="container">
 
-  <div class="stat-grid">
-    <div class="stat-card conduct">
-      <div class="label">Conduct</div>
-      <div class="count">84</div>
-      <div class="pct">43.5%</div>
-    </div>
-    <div class="stat-card output">
-      <div class="label">Output</div>
-      <div class="count">60</div>
-      <div class="pct">31.1%</div>
-    </div>
-    <div class="stat-card process">
-      <div class="label">Process</div>
-      <div class="count">31</div>
-      <div class="pct">16.1%</div>
-    </div>
-    <div class="stat-card mixed">
-      <div class="label">Mixed</div>
-      <div class="count">18</div>
-      <div class="pct">9.3%</div>
-    </div>
-  </div>
+<header class="masthead">
+  <div class="kicker">Sorting State AI Laws &middot; Figure 1</div>
+  <h1>Bucket-Count Summary</h1>
+  <p class="subtitle">193 Enacted State AI Laws Sorted by Regulatory Modality</p>
+</header>
 
-  <div class="chart-wrap">
-    <canvas id="bucketChart" role="img"
-      aria-label="Horizontal bar chart showing 193 state AI laws sorted into four buckets: Conduct 84, Output 60, Process 31, Mixed 18.">
-      Conduct 84, Output 60, Process 31, Mixed 18 (total 193).
-    </canvas>
-  </div>
+<section class="preface">
+  <p>This figure presents the empirical distribution of 193 enacted state AI statutes across four regulatory-modality buckets. The taxonomy &mdash; Process, Output, Conduct, and Mixed &mdash; is the author&rsquo;s original analytical contribution and is described in &sect; III.C of the accompanying Comment.</p>
+</section>
 
-  <div class="footer-note">
-    Total N = 193 enacted state AI statutes. See Appendix A for full enumeration. Coding methodology described in note 109.
-  </div>
+<div class="figure-block">
+  <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Horizontal bar chart of 193 enacted state AI laws by regulatory-modality bucket">
+    <line x1="90.0" y1="40" x2="90.0" y2="310" stroke="#d4cfc0" stroke-width="1" stroke-dasharray="2,3"/><text x="90.0" y="332" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">0</text><line x1="280.0" y1="40" x2="280.0" y2="310" stroke="#d4cfc0" stroke-width="1" stroke-dasharray="2,3"/><text x="280.0" y="332" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">30</text><line x1="470.0" y1="40" x2="470.0" y2="310" stroke="#d4cfc0" stroke-width="1" stroke-dasharray="2,3"/><text x="470.0" y="332" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">60</text><line x1="660.0" y1="40" x2="660.0" y2="310" stroke="#d4cfc0" stroke-width="1" stroke-dasharray="2,3"/><text x="660.0" y="332" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">90</text>
+    <rect x="90" y="50.1" width="532.0" height="47.2" fill="#4a6b4a" rx="2"/><text x="630.0" y="78.8" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a" font-weight="500">84 <tspan fill="#888" font-size="12">(43.5%)</tspan></text><rect x="90" y="117.6" width="380.0" height="47.2" fill="#8b1a1a" rx="2"/><text x="478.0" y="146.2" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a" font-weight="500">60 <tspan fill="#888" font-size="12">(31.1%)</tspan></text><rect x="90" y="185.1" width="196.3" height="47.2" fill="#2c5582" rx="2"/><text x="294.3" y="213.8" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a" font-weight="500">31 <tspan fill="#888" font-size="12">(16.1%)</tspan></text><rect x="90" y="252.6" width="114.0" height="47.2" fill="#8b5a1a" rx="2"/><text x="212.0" y="281.2" font-family="JetBrains Mono, monospace" font-size="14" fill="#1a1a1a" font-weight="500">18 <tspan fill="#888" font-size="12">(9.3%)</tspan></text>
+    <text x="78" y="78.8" text-anchor="end" font-family="EB Garamond, serif" font-size="16" fill="#1a1a1a" font-weight="500">Conduct</text><text x="78" y="146.2" text-anchor="end" font-family="EB Garamond, serif" font-size="16" fill="#1a1a1a" font-weight="500">Output</text><text x="78" y="213.8" text-anchor="end" font-family="EB Garamond, serif" font-size="16" fill="#1a1a1a" font-weight="500">Process</text><text x="78" y="281.2" text-anchor="end" font-family="EB Garamond, serif" font-size="16" fill="#1a1a1a" font-weight="500">Mixed</text>
+    <text x="375.0" y="352" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">Number of statutes (N = 193)</text>
+  </svg>
+  <p class="figure-caption">Fig. 1 — 193 enacted state AI laws by regulatory-modality bucket</p>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  <script>
-    new Chart(document.getElementById('bucketChart'), {
-      type: 'bar',
-      data: {
-        labels: [
-          'Conduct  (EO § 8(b) reserves)',
-          'Output  (Kohls-vulnerable)',
-          'Process  (Note defends)',
-          'Mixed  (hard cases)'
-        ],
-        datasets: [{
-          data: [84, 60, 31, 18],
-          backgroundColor: ['#2E7D5B', '#A32D2D', '#3C3489', '#8B5A00'],
-          borderColor: ['#1F5C42', '#7A2020', '#2A2566', '#6B4500'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.parsed.x + ' statutes (' +
-                ((ctx.parsed.x / 193) * 100).toFixed(1) + '%)'
-            }
-          }
-        },
-        scales: {
-          x: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { font: { size: 12, family: 'Times New Roman' }, color: '#333' },
-            grid: { color: '#e8e8e8' },
-            title: {
-              display: true,
-              text: 'Number of enacted statutes',
-              font: { size: 12, family: 'Times New Roman', style: 'italic' },
-              color: '#333'
-            }
-          },
-          y: {
-            ticks: { font: { size: 13, family: 'Times New Roman' }, color: '#1a1a1a' },
-            grid: { display: false }
-          }
-        }
-      }
-    });
-  </script>
+<p class="summary-line">Roughly 31% of the dataset is in the bucket already losing in court under <em>Kohls v. Bonta</em>. Roughly 16% is the bucket the Comment defends. Roughly 43% is conduct that the Executive Order&rsquo;s own &sect; 8(b) carve-outs already preserve.</p>
+
+<div class="bucket-cards">
+
+<div class="bucket-card" style="border-left-color: #4a6b4a;">
+  <header class="bucket-card-head">
+    <span class="bucket-name" style="color: #4a6b4a;">Conduct</span>
+    <span class="bucket-numbers">84 statutes &middot; 43.5%</span>
+  </header>
+  <p class="bucket-desc">Acts already unlawful regardless of AI involvement. The Executive Order's own § 8(b) carve-outs (child safety, AI computing infrastructure, state government procurement) overlap heavily with this bucket.</p>
+</div>
+<div class="bucket-card" style="border-left-color: #8b1a1a;">
+  <header class="bucket-card-head">
+    <span class="bucket-name" style="color: #8b1a1a;">Output</span>
+    <span class="bucket-numbers">60 statutes &middot; 31.1%</span>
+  </header>
+  <p class="bucket-desc">Statutes that condition the lawfulness of AI communicative product on its form or content. Compelled disclaimers, watermarking mandates, and content-based prohibitions are typical. Carries live First Amendment risk under Kohls v. Bonta.</p>
+</div>
+<div class="bucket-card" style="border-left-color: #2c5582;">
+  <header class="bucket-card-head">
+    <span class="bucket-name" style="color: #2c5582;">Process</span>
+    <span class="bucket-numbers">31 statutes &middot; 16.1%</span>
+  </header>
+  <p class="bucket-desc">Statutes governing how AI systems are developed, documented, and managed. Lead examples include TRAIGA, the Colorado AI Act, TFAIA, and the RAISE Act.</p>
+</div>
+<div class="bucket-card" style="border-left-color: #8b5a1a;">
+  <header class="bucket-card-head">
+    <span class="bucket-name" style="color: #8b5a1a;">Mixed</span>
+    <span class="bucket-numbers">18 statutes &middot; 9.3%</span>
+  </header>
+  <p class="bucket-desc">Statutes that genuinely blend modalities and resist clean sorting. Healthcare AI is the dominant pattern; ten of the eighteen mixed statutes regulate healthcare AI.</p>
+</div>
+</div>
+
+<footer class="footer">
+  <p>Figure 1 accompanies the Comment <em>Sorting State AI Laws: A Process / Output / Conduct Taxonomy for Federal AI Preemption</em>. Source dataset: see Appendix A at <code>azvoice.github.io/process-not-output/Process_Not_Output_Appendix_A.html</code>.</p>
+</footer>
+
+</div>
 </body>
 </html>
