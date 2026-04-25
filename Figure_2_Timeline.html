@@ -2,157 +2,228 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Figure 2 — Timeline of Kohls Rulings, EO 14365, and the March 2026 Framework</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 2 — Timeline: Kohls v. Bonta, Executive Order 14365, and the March 2026 Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: "Times New Roman", Georgia, serif;
-    background: #ffffff;
-    color: #1a1a1a;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 30px;
-    line-height: 1.5;
-  }
-  .figure-caption {
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  .figure-title {
-    font-size: 15px;
-    font-style: italic;
-    margin-bottom: 20px;
-  }
-  .svg-wrap {
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    padding: 16px;
-    background: #ffffff;
-  }
-  .footer-note {
-    font-size: 11px;
-    font-style: italic;
-    color: #555555;
-    margin-top: 14px;
-  }
-  svg { display: block; width: 100%; height: auto; background: #ffffff; }
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #888;
+  --paper: #faf8f3;
+  --paper-card: #ffffff;
+  --rule: #d4cfc0;
+  --rule-strong: #8b8780;
+  --accent: #6b2424;
+  --process: #2c5582;
+  --output: #8b1a1a;
+  --conduct: #4a6b4a;
+  --mixed: #8b5a1a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+.masthead {
+  border-top: 4px double var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+.kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-family: "EB Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+.preface {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 2rem auto 2.5rem;
+  max-width: 760px;
+}
+.preface p { margin-bottom: 0.75rem; }
+.preface p:last-child { margin-bottom: 0; }
+.footer {
+  margin: 3.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  max-width: 760px;
+  text-align: center;
+}
+@media print {
+  body { background: white; font-size: 10pt; }
+  .container { padding: 1rem; max-width: none; }
+}
 
-  .tl-axis       { stroke: #7a7a7a; stroke-width: 1; }
-  .tl-tick       { stroke: #7a7a7a; stroke-width: 1; }
-  .tl-guide      { stroke: #b0b0b0; stroke-width: 0.75; stroke-dasharray: 3 3; }
-  .tl-axis-lbl   { fill: #333333; font-size: 11px; font-family: "Times New Roman"; }
-
-  .section-lbl   { fill: #1a1a1a; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
-  .section-sub   { fill: #555555; font-size: 11px; font-style: italic; font-family: "Times New Roman"; }
-
-  /* KOHLS (red family) - above the axis */
-  .kohls-dot     { fill: #A32D2D; }
-  .kohls-box     { fill: #fdeaea; stroke: #A32D2D; stroke-width: 1; }
-  .kohls-lbl     { fill: #6b0e0e; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
-  .kohls-date    { fill: #8a1f1f; font-size: 11px; font-family: "Times New Roman"; }
-  .kohls-guide   { stroke: #A32D2D; stroke-width: 0.75; stroke-dasharray: 3 3; }
-
-  /* EO + FRAMEWORK (blue family) - below the axis */
-  .eo-dot        { fill: #1E60A8; }
-  .eo-box        { fill: #eaf1f9; stroke: #1E60A8; stroke-width: 1; }
-  .eo-lbl        { fill: #0f3e6f; font-size: 12px; font-weight: bold; font-family: "Times New Roman"; }
-  .eo-date       { fill: #1E60A8; font-size: 11px; font-family: "Times New Roman"; }
-  .eo-guide      { stroke: #1E60A8; stroke-width: 0.75; stroke-dasharray: 3 3; }
-
-  /* PROCESS STATUTES (purple, smaller) */
-  .proc-dot      { fill: #3C3489; }
-  .proc-lbl      { fill: #3C3489; font-size: 11px; font-family: "Times New Roman"; font-style: italic; }
+.figure-block {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1rem 1.5rem;
+  margin: 0 auto 2.5rem;
+  max-width: 960px;
+  overflow-x: auto;
+}
+.figure-caption {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  margin-top: 1rem;
+}
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.legend-item { display: flex; align-items: center; gap: 0.5rem; }
+.legend-swatch {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+}
+.legend-bar {
+  display: inline-block;
+  width: 14px;
+  height: 12px;
+  background: #a8c2d8;
+  opacity: 0.75;
+}
+.event-table {
+  max-width: 760px;
+  margin: 1.5rem auto 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  width: 100%;
+}
+.event-table th, .event-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.event-table th {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  background: rgba(0,0,0,0.02);
+}
+.event-table td.date-cell {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.event-table td.event-cell { font-weight: 500; }
 </style>
 </head>
 <body>
-  <div class="figure-caption">FIGURE 2.</div>
-  <div class="figure-title">Timeline of Kohls v. Bonta rulings, Executive Order 14365, and the March 2026 National Policy Framework, October 2024 to March 2026.</div>
+<div class="container">
 
-  <div class="svg-wrap">
-    <svg viewBox="0 0 820 440" role="img"
-         aria-label="Horizontal timeline spanning October 2024 to March 2026 showing the Kohls preliminary injunction, Kohls summary judgment, EO 14365, and the White House National Policy Framework, with TRAIGA and TFAIA effective dates plotted alongside.">
-      <title>Timeline of Kohls v. Bonta rulings, EO 14365, and the March 2026 National Policy Framework</title>
+<header class="masthead">
+  <div class="kicker">Sorting State AI Laws &middot; Figure 2</div>
+  <h1>Federal AI Timeline, 2023&ndash;2027</h1>
+  <p class="subtitle"><em>Kohls v. Bonta</em> Rulings, Executive Order 14365, and the March 2026 Framework Alongside State Statute Effective Dates</p>
+</header>
 
-      <!-- Section labels -->
-      <text x="40" y="34" class="section-lbl">Constitutional predictor</text>
-      <text x="40" y="50" class="section-sub">(Kohls v. Bonta rulings)</text>
+<section class="preface">
+  <p>This figure plots four pivotal federal events &mdash; the <em>Kohls v. Bonta</em> preliminary injunction (Oct. 2, 2024), the <em>Kohls</em> summary judgment (Aug. 29, 2025), Executive Order 14365 (Dec. 11, 2025), and the National Policy Framework (Mar. 20, 2026) &mdash; against the monthly density of state AI statute effective dates across the 193-law dataset.</p>
+  <p>The federal events sit on the upper rail. The lower band is the histogram of state-statute effective-date density. The two registers are scaled together to make the relative timing visible.</p>
+</section>
 
-      <text x="40" y="410" class="section-lbl">Federal preemption effort</text>
-      <text x="40" y="426" class="section-sub">(Executive Order 14365 and March 2026 Framework)</text>
+<div class="figure-block">
+  <svg viewBox="0 0 920 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Timeline plotting four federal events against monthly density of state AI statute effective dates from 2023 through mid-2027">
+    <line x1="70.0" y1="50" x2="70.0" y2="380" stroke="#d4cfc0" stroke-width="0.5"/><text x="70.0" y="402" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">2023</text><line x1="255.7" y1="50" x2="255.7" y2="380" stroke="#d4cfc0" stroke-width="0.5"/><text x="255.7" y="402" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">2024</text><line x1="441.3" y1="50" x2="441.3" y2="380" stroke="#d4cfc0" stroke-width="0.5"/><text x="441.3" y="402" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">2025</text><line x1="627.0" y1="50" x2="627.0" y2="380" stroke="#d4cfc0" stroke-width="0.5"/><text x="627.0" y="402" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">2026</text><line x1="812.6" y1="50" x2="812.6" y2="380" stroke="#d4cfc0" stroke-width="0.5"/><text x="812.6" y="402" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888">2027</text><line x1="116.4" y1="376" x2="116.4" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="162.8" y1="376" x2="162.8" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="209.2" y1="376" x2="209.2" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="302.1" y1="376" x2="302.1" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="348.5" y1="376" x2="348.5" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="394.9" y1="376" x2="394.9" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="487.7" y1="376" x2="487.7" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="534.2" y1="376" x2="534.2" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="580.6" y1="376" x2="580.6" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="673.4" y1="376" x2="673.4" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="719.8" y1="376" x2="719.8" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="766.2" y1="376" x2="766.2" y2="382" stroke="#aaa" stroke-width="0.5"/><line x1="859.1" y1="376" x2="859.1" y2="382" stroke="#aaa" stroke-width="0.5"/>
+    <line x1="70" y1="130" x2="890" y2="130" stroke="#1a1a1a" stroke-width="1.5"/>
+    <line x1="395.4" y1="130" x2="395.4" y2="370" stroke="#6b2424" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><circle cx="395.4" cy="130" r="6" fill="#6b2424" stroke="white" stroke-width="2"/><text x="395.4" y="65" text-anchor="middle" font-family="EB Garamond, serif" font-size="14" font-weight="600" fill="#6b2424">Kohls v. Bonta</text><text x="395.4" y="79" text-anchor="middle" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">Preliminary injunction (E.D. Cal.)</text><text x="395.4" y="93" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#888">2024.10.02</text><line x1="564.1" y1="130" x2="564.1" y2="370" stroke="#6b2424" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><circle cx="564.1" cy="130" r="6" fill="#6b2424" stroke="white" stroke-width="2"/><text x="564.1" y="95" text-anchor="middle" font-family="EB Garamond, serif" font-size="14" font-weight="600" fill="#6b2424">Kohls v. Bonta</text><text x="564.1" y="109" text-anchor="middle" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">Summary judgment (E.D. Cal.)</text><text x="564.1" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#888">2025.08.29</text><line x1="616.7" y1="130" x2="616.7" y2="370" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><circle cx="616.7" cy="130" r="6" fill="#1a1a1a" stroke="white" stroke-width="2"/><text x="616.7" y="65" text-anchor="middle" font-family="EB Garamond, serif" font-size="14" font-weight="600" fill="#1a1a1a">Executive Order 14365</text><text x="616.7" y="79" text-anchor="middle" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">Signed by President Trump</text><text x="616.7" y="93" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#888">2025.12.11</text><line x1="667.7" y1="130" x2="667.7" y2="370" stroke="#2c5582" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><circle cx="667.7" cy="130" r="6" fill="#2c5582" stroke="white" stroke-width="2"/><text x="667.7" y="95" text-anchor="middle" font-family="EB Garamond, serif" font-size="14" font-weight="600" fill="#2c5582">National Policy Framework</text><text x="667.7" y="109" text-anchor="middle" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">March 2026 Framework released</text><text x="667.7" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#888">2026.03.20</text>
+    <rect x="63.4" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="94.4" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="109.8" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="125.3" y="352.2" width="13.2" height="17.8" fill="#a8c2d8" opacity="0.75"/><rect x="140.8" y="352.2" width="13.2" height="17.8" fill="#a8c2d8" opacity="0.75"/><rect x="156.2" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="171.7" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="187.2" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="202.7" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="218.1" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="233.6" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="249.1" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="264.5" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="280.0" y="316.7" width="13.2" height="53.3" fill="#a8c2d8" opacity="0.75"/><rect x="295.5" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="311.0" y="307.8" width="13.2" height="62.2" fill="#a8c2d8" opacity="0.75"/><rect x="326.4" y="298.9" width="13.2" height="71.1" fill="#a8c2d8" opacity="0.75"/><rect x="341.9" y="290.0" width="13.2" height="80.0" fill="#a8c2d8" opacity="0.75"/><rect x="357.4" y="307.8" width="13.2" height="62.2" fill="#a8c2d8" opacity="0.75"/><rect x="372.8" y="298.9" width="13.2" height="71.1" fill="#a8c2d8" opacity="0.75"/><rect x="388.3" y="316.7" width="13.2" height="53.3" fill="#a8c2d8" opacity="0.75"/><rect x="403.8" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="419.3" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="434.7" y="316.7" width="13.2" height="53.3" fill="#a8c2d8" opacity="0.75"/><rect x="450.2" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="465.7" y="307.8" width="13.2" height="62.2" fill="#a8c2d8" opacity="0.75"/><rect x="481.1" y="316.7" width="13.2" height="53.3" fill="#a8c2d8" opacity="0.75"/><rect x="496.6" y="298.9" width="13.2" height="71.1" fill="#a8c2d8" opacity="0.75"/><rect x="512.1" y="290.0" width="13.2" height="80.0" fill="#a8c2d8" opacity="0.75"/><rect x="527.6" y="307.8" width="13.2" height="62.2" fill="#a8c2d8" opacity="0.75"/><rect x="543.0" y="316.7" width="13.2" height="53.3" fill="#a8c2d8" opacity="0.75"/><rect x="558.5" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="574.0" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="589.4" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="604.9" y="334.4" width="13.2" height="35.6" fill="#a8c2d8" opacity="0.75"/><rect x="620.4" y="325.6" width="13.2" height="44.4" fill="#a8c2d8" opacity="0.75"/><rect x="635.9" y="343.3" width="13.2" height="26.7" fill="#a8c2d8" opacity="0.75"/><rect x="651.3" y="352.2" width="13.2" height="17.8" fill="#a8c2d8" opacity="0.75"/><rect x="666.8" y="352.2" width="13.2" height="17.8" fill="#a8c2d8" opacity="0.75"/><rect x="682.3" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="697.7" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="713.2" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/><rect x="806.0" y="361.1" width="13.2" height="8.9" fill="#a8c2d8" opacity="0.75"/>
+    <text x="62" y="134" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#888" text-transform="uppercase" letter-spacing="0.1em">FEDERAL</text><text x="62" y="334.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#888">STATE</text><text x="62" y="348.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#aaa">density</text>
+    <text transform="translate(20,330.0) rotate(-90)" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#aaa">statutes / month</text>
+  </svg>
+  <p class="figure-caption">Fig. 2 &mdash; Federal events and state statute effective-date density</p>
+</div>
 
-      <!-- Main timeline axis -->
-      <line x1="70"  y1="230" x2="780" y2="230" class="tl-axis"/>
-      <line x1="70"  y1="225" x2="70"  y2="235" class="tl-tick"/>
-      <line x1="780" y1="225" x2="780" y2="235" class="tl-tick"/>
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:#6b2424;"></span> Kohls v. Bonta rulings</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#1a1a1a;"></span> Executive Order 14365</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#2c5582;"></span> National Policy Framework</div>
+  <div class="legend-item"><span class="legend-bar"></span> State statute effective-date density</div>
+</div>
 
-      <!-- Quarter tick marks -->
-      <line x1="188" y1="228" x2="188" y2="232" class="tl-tick"/>
-      <line x1="306" y1="228" x2="306" y2="232" class="tl-tick"/>
-      <line x1="424" y1="228" x2="424" y2="232" class="tl-tick"/>
-      <line x1="543" y1="228" x2="543" y2="232" class="tl-tick"/>
-      <line x1="661" y1="228" x2="661" y2="232" class="tl-tick"/>
+<table class="event-table">
+  <thead>
+    <tr><th>Date</th><th>Event</th><th>Significance</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="date-cell">Oct. 2, 2024</td>
+      <td class="event-cell"><em>Kohls v. Bonta</em> &mdash; Preliminary Injunction</td>
+      <td>E.D. Cal. preliminarily enjoins California AB 2839 on First Amendment grounds. <em>Kohls v. Bonta</em>, 752 F. Supp. 3d 1187 (E.D. Cal. 2024).</td>
+    </tr>
+    <tr>
+      <td class="date-cell">Aug. 29, 2025</td>
+      <td class="event-cell"><em>Kohls v. Bonta</em> &mdash; Summary Judgment</td>
+      <td>E.D. Cal. enters summary judgment striking down AB 2839 in full. First merits ruling on the constitutionality of a state AI statute.</td>
+    </tr>
+    <tr>
+      <td class="date-cell">Dec. 11, 2025</td>
+      <td class="event-cell">Executive Order 14365</td>
+      <td>President Trump signs EO 14365. &sect; 8(a) directs senior officials to prepare a federal legislative recommendation; &sect; 8(b) reserves four categories from preemption. 90 Fed. Reg. 58,499.</td>
+    </tr>
+    <tr>
+      <td class="date-cell">Mar. 20, 2026</td>
+      <td class="event-cell">National Policy Framework</td>
+      <td>White House releases the National Policy Framework for Artificial Intelligence pursuant to EO 14365.</td>
+    </tr>
+  </tbody>
+</table>
 
-      <!-- Axis labels -->
-      <text x="70"  y="256" class="tl-axis-lbl" text-anchor="start">Oct 2024</text>
-      <text x="188" y="256" class="tl-axis-lbl" text-anchor="middle">Jan 2025</text>
-      <text x="306" y="256" class="tl-axis-lbl" text-anchor="middle">Apr 2025</text>
-      <text x="424" y="256" class="tl-axis-lbl" text-anchor="middle">Jul 2025</text>
-      <text x="543" y="256" class="tl-axis-lbl" text-anchor="middle">Oct 2025</text>
-      <text x="661" y="256" class="tl-axis-lbl" text-anchor="middle">Jan 2026</text>
-      <text x="780" y="256" class="tl-axis-lbl" text-anchor="end">Mar 2026</text>
+<footer class="footer">
+  <p>Figure 2 accompanies the Comment <em>Sorting State AI Laws: A Process / Output / Conduct Taxonomy for Federal AI Preemption</em>. State statute effective-date density is illustrative, derived from the 193-law dataset reproduced as Appendix A. Effective-date assignments use month granularity where day is not available.</p>
+</footer>
 
-      <!-- === KOHLS EVENTS (above axis) === -->
-
-      <!-- Kohls PI: Oct 2, 2024 -> x = 76 (very near start) -->
-      <circle cx="76" cy="230" r="5" class="kohls-dot"/>
-      <line x1="76" y1="225" x2="76" y2="175" class="kohls-guide"/>
-      <rect x="18" y="95" width="168" height="80" rx="5" class="kohls-box"/>
-      <text x="102" y="118" text-anchor="middle" class="kohls-lbl">Kohls v. Bonta</text>
-      <text x="102" y="136" text-anchor="middle" class="kohls-lbl">Preliminary Injunction</text>
-      <text x="102" y="156" text-anchor="middle" class="kohls-date">Oct. 2, 2024</text>
-      <text x="102" y="170" text-anchor="middle" class="kohls-date">E.D. Cal.</text>
-
-      <!-- Kohls SJ: Aug 29, 2025 -> x = 495 -->
-      <circle cx="495" cy="230" r="5" class="kohls-dot"/>
-      <line x1="495" y1="225" x2="495" y2="175" class="kohls-guide"/>
-      <rect x="411" y="95" width="168" height="80" rx="5" class="kohls-box"/>
-      <text x="495" y="118" text-anchor="middle" class="kohls-lbl">Kohls v. Bonta</text>
-      <text x="495" y="136" text-anchor="middle" class="kohls-lbl">Summary Judgment</text>
-      <text x="495" y="156" text-anchor="middle" class="kohls-date">Aug. 29, 2025</text>
-      <text x="495" y="170" text-anchor="middle" class="kohls-date">E.D. Cal.</text>
-
-      <!-- === PROCESS STATUTES EFFECTIVE DATES (on axis, inline) === -->
-
-      <!-- TRAIGA + TFAIA eff: Jan 1, 2026 -> x = 661 (same point) -->
-      <circle cx="661" cy="230" r="3.5" class="proc-dot"/>
-      <text x="661" y="208" text-anchor="middle" class="proc-lbl">TRAIGA + TFAIA eff.</text>
-      <text x="661" y="194" text-anchor="middle" class="proc-lbl">Jan. 1, 2026</text>
-
-      <!-- === EO + FRAMEWORK EVENTS (below axis) === -->
-
-      <!-- EO 14365: Dec 11, 2025 -> x = 629 -->
-      <circle cx="629" cy="230" r="5" class="eo-dot"/>
-      <line x1="629" y1="235" x2="629" y2="292" class="eo-guide"/>
-      <rect x="492" y="292" width="168" height="80" rx="5" class="eo-box"/>
-      <text x="576" y="315" text-anchor="middle" class="eo-lbl">Executive Order</text>
-      <text x="576" y="333" text-anchor="middle" class="eo-lbl">No. 14,365</text>
-      <text x="576" y="353" text-anchor="middle" class="eo-date">Dec. 11, 2025</text>
-      <text x="576" y="367" text-anchor="middle" class="eo-date">90 Fed. Reg. 58,499</text>
-
-      <!-- National Policy Framework: Mar 20, 2026 -> x = 769 (near end) -->
-      <circle cx="769" cy="230" r="5" class="eo-dot"/>
-      <line x1="769" y1="235" x2="769" y2="292" class="eo-guide"/>
-      <rect x="678" y="292" width="130" height="80" rx="5" class="eo-box"/>
-      <text x="743" y="315" text-anchor="middle" class="eo-lbl">National Policy</text>
-      <text x="743" y="333" text-anchor="middle" class="eo-lbl">Framework</text>
-      <text x="743" y="353" text-anchor="middle" class="eo-date">Mar. 20, 2026</text>
-      <text x="743" y="367" text-anchor="middle" class="eo-date">(White House)</text>
-
-    </svg>
-  </div>
-
-  <div class="footer-note">
-    Process statutes (TRAIGA and TFAIA) took effect on January 1, 2026, between the Kohls summary judgment (Aug. 29, 2025) and the March 2026 National Policy Framework. Both statutes are PROCESS-bucket enactments the Note defends. See notes 112, 119. 
-  </div>
+</div>
 </body>
 </html>
