@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figure 3 — EO 14365 § 8(b) Reservations Mapped to State AI Law Buckets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #888;
+  --paper: #faf8f3;
+  --paper-card: #ffffff;
+  --rule: #d4cfc0;
+  --rule-strong: #8b8780;
+  --accent: #6b2424;
+  --process: #2c5582;
+  --output: #8b1a1a;
+  --conduct: #4a6b4a;
+  --mixed: #8b5a1a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+.masthead {
+  border-top: 4px double var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+.kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-family: "EB Garamond", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+.preface {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  margin: 2rem auto 2.5rem;
+  max-width: 760px;
+}
+.preface p { margin-bottom: 0.75rem; }
+.preface p:last-child { margin-bottom: 0; }
+.footer {
+  margin: 3.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  max-width: 760px;
+  text-align: center;
+}
+@media print {
+  body { background: white; font-size: 10pt; }
+  .container { padding: 1rem; max-width: none; }
+}
+
+.figure-block {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1rem;
+  margin: 0 auto 2.5rem;
+  max-width: 920px;
+  overflow: visible;
+}
+.figure-block svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.figure-caption {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  margin-top: 1rem;
+}
+.crosswalk-table {
+  max-width: 880px;
+  margin: 2rem auto 0;
+  font-size: 0.94rem;
+}
+.crosswalk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  border-bottom: 1px dotted var(--rule);
+  padding: 1.25rem 0;
+}
+.crosswalk-row:last-child { border-bottom: none; }
+.crosswalk-cite {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+.crosswalk-label {
+  font-family: "EB Garamond", serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.crosswalk-overlap-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+.crosswalk-overlap-text {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.bucket-pills {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+.bucket-pill {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  color: white;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 720px) {
+  .crosswalk-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="masthead">
+  <div class="kicker">Sorting State AI Laws &middot; Figure 3</div>
+  <h1>Section 8(b) Crosswalk</h1>
+  <p class="subtitle">Executive Order 14365 &sect; 8(b) Reservations Mapped to State AI Law Buckets</p>
+</header>
+
+<section class="preface">
+  <p>Section 8(b) of Executive Order 14365 reserves four categories of state law from federal preemption: child safety, AI computing infrastructure, state government procurement, and other categories to be determined. This figure maps each reservation to the regulatory-modality buckets developed in &sect; III.C of the accompanying Comment.</p>
+  <p>The principal finding is that &sect; 8(b)&rsquo;s reservations overlap heavily with the CONDUCT bucket. The Order&rsquo;s own carve-outs are already, in substance, conduct-bucket protections.</p>
+</section>
+
+<div class="figure-block">
+  <svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Sankey-style diagram mapping the four EO §8(b) reservation categories on the left to the four regulatory-modality buckets on the right">
+    <text x="150.0" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.1em">EO &#xA7; 8(b) RESERVATIONS</text><text x="785.0" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.1em">REGULATORY MODALITY</text>
+    <path d="M 270.0,50.0 C 485.0,50.0 485.0,50.0 700.0,50.0 L 700.0,120.7 C 485.0,120.7 485.0,150.7 270.0,150.7 Z" fill="#4a6b4a" opacity="0.30"/><path d="M 270.0,150.7 C 485.0,150.7 485.0,469.3 700.0,469.3 L 700.0,471.3 C 485.0,471.3 485.0,156.0 270.0,156.0 Z" fill="#8b5a1a" opacity="0.30"/><path d="M 270.0,168.0 C 485.0,168.0 485.0,120.7 700.0,120.7 L 700.0,135.6 C 485.0,135.6 485.0,189.2 270.0,189.2 Z" fill="#4a6b4a" opacity="0.30"/><path d="M 270.0,189.2 C 485.0,189.2 485.0,471.3 700.0,471.3 L 700.0,502.3 C 485.0,502.3 485.0,274.0 270.0,274.0 Z" fill="#8b5a1a" opacity="0.30"/><path d="M 270.0,286.0 C 485.0,286.0 485.0,135.6 700.0,135.6 L 700.0,210.0 C 485.0,210.0 485.0,392.0 270.0,392.0 Z" fill="#4a6b4a" opacity="0.30"/><path d="M 270.0,404.0 C 485.0,404.0 485.0,391.3 700.0,391.3 L 700.0,461.3 C 485.0,461.3 485.0,446.4 270.0,446.4 Z" fill="#2c5582" opacity="0.30"/><path d="M 270.0,446.4 C 485.0,446.4 485.0,210.0 700.0,210.0 L 700.0,239.8 C 485.0,239.8 485.0,488.8 270.0,488.8 Z" fill="#4a6b4a" opacity="0.30"/><path d="M 270.0,488.8 C 485.0,488.8 485.0,502.3 700.0,502.3 L 700.0,510.0 C 485.0,510.0 485.0,510.0 270.0,510.0 Z" fill="#8b5a1a" opacity="0.30"/>
+    <rect x="30" y="50.0" width="240" height="106.0" fill="white" stroke="#4a6b4a" stroke-width="1.5" rx="3"/><text x="44" y="72.0" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.05em">EO § 8(b)(i)</text><text x="44" y="94.0" font-family="EB Garamond, serif" font-size="16" font-weight="600" fill="#1a1a1a">Child Safety</text><text x="44" y="114.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">AI-CSAM laws, child-image</text><text x="44" y="128.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">protection statutes,</text><text x="44" y="142.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">age-verification provisions</text><rect x="30" y="168.0" width="240" height="106.0" fill="white" stroke="#4a6b4a" stroke-width="1.5" rx="3"/><text x="44" y="190.0" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.05em">EO § 8(b)(ii)</text><text x="44" y="212.0" font-family="EB Garamond, serif" font-size="16" font-weight="600" fill="#1a1a1a">AI Computing Infrastructure</text><text x="44" y="232.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">Data-center authorization rules;</text><text x="44" y="246.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">computational-power licensing</text><text x="44" y="260.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">(AZ, MT)</text><rect x="30" y="286.0" width="240" height="106.0" fill="white" stroke="#4a6b4a" stroke-width="1.5" rx="3"/><text x="44" y="308.0" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.05em">EO § 8(b)(iii)</text><text x="44" y="330.0" font-family="EB Garamond, serif" font-size="16" font-weight="600" fill="#1a1a1a">State Government Procurement</text><text x="44" y="350.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">State-agency AI use rules;</text><text x="44" y="364.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">government-procurement</text><text x="44" y="378.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">transparency (CA, MD, NH, TX, VA)</text><rect x="30" y="404.0" width="240" height="106.0" fill="white" stroke="#888" stroke-width="1.5" rx="3"/><text x="44" y="426.0" font-family="JetBrains Mono, monospace" font-size="11" fill="#888" letter-spacing="0.05em">EO § 8(b)(iv)</text><text x="44" y="448.0" font-family="EB Garamond, serif" font-size="16" font-weight="600" fill="#1a1a1a">Other Categories TBD</text><text x="44" y="468.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">To be determined in Section 8(a)</text><text x="44" y="482.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">drafting; healthcare AI clinical</text><text x="44" y="496.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">practice, anti-discrimination,</text><text x="44" y="510.0" font-family="EB Garamond, serif" font-size="12" fill="#4a4a4a" font-style="italic">state tort-law application</text>
+    <rect x="700" y="50.0" width="170" height="189.8" fill="#4a6b4a" opacity="0.85" rx="3"/><text x="785.0" y="142.9" text-anchor="middle" font-family="EB Garamond, serif" font-size="17" font-weight="600" fill="white">CONDUCT</text><text x="785.0" y="160.9" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="white" opacity="0.85">84 statutes</text><rect x="700" y="247.8" width="170" height="135.5" fill="#8b1a1a" opacity="0.85" rx="3"/><text x="785.0" y="313.5" text-anchor="middle" font-family="EB Garamond, serif" font-size="17" font-weight="600" fill="white">OUTPUT</text><text x="785.0" y="331.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="white" opacity="0.85">60 statutes</text><rect x="700" y="391.3" width="170" height="70.0" fill="#2c5582" opacity="0.85" rx="3"/><text x="785.0" y="424.3" text-anchor="middle" font-family="EB Garamond, serif" font-size="17" font-weight="600" fill="white">PROCESS</text><text x="785.0" y="442.3" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="white" opacity="0.85">31 statutes</text><rect x="700" y="469.3" width="170" height="40.7" fill="#8b5a1a" opacity="0.85" rx="3"/><text x="785.0" y="487.7" text-anchor="middle" font-family="EB Garamond, serif" font-size="17" font-weight="600" fill="white">MIXED</text><text x="785.0" y="505.7" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="white" opacity="0.85">18 statutes</text>
+  </svg>
+  <p class="figure-caption">Fig. 3 &mdash; EO &sect; 8(b) reservations mapped to bucket categories. Ribbon thickness indicates approximate overlap weight.</p>
+</div>
+
+<section class="crosswalk-table">
+
+<div class="crosswalk-row">
+  <div>
+    <div class="crosswalk-cite">EO § 8(b)(i)</div>
+    <div class="crosswalk-label">Child Safety</div>
+    <div class="crosswalk-overlap-text" style="font-style:italic; font-size:0.92rem; color:#4a4a4a;">AI-CSAM laws, child-image protection statutes, age-verification provisions</div>
+    <div class="bucket-pills"><span class="bucket-pill" style="background:#4a6b4a;">CONDUCT &middot; 95%</span><span class="bucket-pill" style="background:#8b5a1a;">MIXED &middot; 5%</span></div>
+  </div>
+  <div>
+    <div class="crosswalk-overlap-label">Bucket overlap</div>
+    <div class="crosswalk-overlap-text">Heavy CONDUCT overlap. AI-generated child sexual abuse material is criminal because the underlying conduct is criminal — AI is the means, not the end.</div>
+  </div>
+</div>
+<div class="crosswalk-row">
+  <div>
+    <div class="crosswalk-cite">EO § 8(b)(ii)</div>
+    <div class="crosswalk-label">AI Computing Infrastructure</div>
+    <div class="crosswalk-overlap-text" style="font-style:italic; font-size:0.92rem; color:#4a4a4a;">Data-center authorization rules; computational-power licensing (AZ, MT)</div>
+    <div class="bucket-pills"><span class="bucket-pill" style="background:#4a6b4a;">CONDUCT &middot; 20%</span><span class="bucket-pill" style="background:#8b5a1a;">MIXED &middot; 80%</span></div>
+  </div>
+  <div>
+    <div class="crosswalk-overlap-label">Bucket overlap</div>
+    <div class="crosswalk-overlap-text">Sparse direct match. No enacted state statute in the 193-law dataset directly regulates AI compute as a discrete subject. Two MIXED statutes (AZ Computational Power Law, MT Right to Compute Act) regulate local-government authority over compute, peripherally.</div>
+  </div>
+</div>
+<div class="crosswalk-row">
+  <div>
+    <div class="crosswalk-cite">EO § 8(b)(iii)</div>
+    <div class="crosswalk-label">State Government Procurement</div>
+    <div class="crosswalk-overlap-text" style="font-style:italic; font-size:0.92rem; color:#4a4a4a;">State-agency AI use rules; government-procurement transparency (CA, MD, NH, TX, VA)</div>
+    <div class="bucket-pills"><span class="bucket-pill" style="background:#4a6b4a;">CONDUCT &middot; 100%</span></div>
+  </div>
+  <div>
+    <div class="crosswalk-overlap-label">Bucket overlap</div>
+    <div class="crosswalk-overlap-text">Pure CONDUCT overlap. State procurement rules govern how state agencies buy and use AI for their own operations — the state acting as market participant, not as regulator of private speech.</div>
+  </div>
+</div>
+<div class="crosswalk-row">
+  <div>
+    <div class="crosswalk-cite">EO § 8(b)(iv)</div>
+    <div class="crosswalk-label">Other Categories TBD</div>
+    <div class="crosswalk-overlap-text" style="font-style:italic; font-size:0.92rem; color:#4a4a4a;">To be determined in Section 8(a) drafting; healthcare AI clinical practice, anti-discrimination, state tort-law application</div>
+    <div class="bucket-pills"><span class="bucket-pill" style="background:#2c5582;">PROCESS &middot; 40%</span><span class="bucket-pill" style="background:#4a6b4a;">CONDUCT &middot; 40%</span><span class="bucket-pill" style="background:#8b5a1a;">MIXED &middot; 20%</span></div>
+  </div>
+  <div>
+    <div class="crosswalk-overlap-label">Bucket overlap</div>
+    <div class="crosswalk-overlap-text">Open category. Comment recommends explicit preservation of additional CONDUCT categories (anti-discrimination, NCII, tort-law applications) and PROCESS categories (TRAIGA, Colorado AI Act, TFAIA, RAISE Act anchors).</div>
+  </div>
+</div>
+</section>
+
+<footer class="footer">
+  <p>Figure 3 accompanies the Comment <em>Sorting State AI Laws: A Process / Output / Conduct Taxonomy for Federal AI Preemption</em>. Bucket counts: 84 / 60 / 31 / 18 = 193 enacted state AI statutes. Source dataset: see Appendix A at <code>azvoice.github.io/process-not-output/Process_Not_Output_Appendix_A.html</code>.</p>
+</footer>
+
+</div>
+</body>
+</html>
